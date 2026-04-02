@@ -12,7 +12,7 @@ export type InfoPay = {
   gatewayUrl: string
 }
 
-export type InfoTrackingPayment = 'requires_action' | 'processing' | 'success' | 'failed' | 'expired' | 'cancelled'
+export type InfoTrackingPayment = 'requires_action' | 'processing' | 'success' | 'succeeded' | 'failed' | 'expired' | 'cancelled'
 
 class PossServices {
   static async createPayment(value: string): Promise<InfoPay> {
