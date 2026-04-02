@@ -4,48 +4,23 @@ import { useState } from 'react'
 
 import EnterPay from './(Component)/EnterPay'
 import EnterAmount from './(Component)/EnterAmount'
+import QrPay from './(Component)/QrPay'
 
 import MyImage from '@/components/MyImage'
 import { images } from '@/config/images'
 import useSizePoss from '@/hooks/useSizePoss'
 import useSizeScreen from '@/hooks/useSizeScreen'
 import { cn } from '@/utils/tailwind'
+import { InfoPay } from '@/services/API/poss'
 type Step = 'enter-pay' | 'enter-pin' | 'enter-amount' | 'qr' | 'success' | 'history'
 const HomePage = () => {
   const [step, setStep] = useState<Step>('enter-pay')
   const { isBySizeWidth, isBySizeHeight } = useSizeScreen()
   const { reSize, height, width } = useSizePoss()
-  const [value, setValue] = useState('0.0')
+  const [value, setValue] = useState('0')
+  const [infoPay, setInfoPay] = useState<InfoPay | null>(null)
 
-  const handleKeyPress = (key: string) => {
-    if (key === 'back') {
-      if (value.length <= 1 || value === '0' || value === '0.0') {
-        setValue('0.0')
-      } else {
-        setValue((prev) => {
-          const next = prev.slice(0, -2)
-
-          return next === '' ? '0.0' : next
-        })
-      }
-
-      return
-    }
-    if (key === '0' && value === '0') {
-      return
-    }
-
-    if (value === '0.0') {
-      if (key === '.') {
-        setValue('0.')
-      } else {
-        setValue(key)
-      }
-    } else {
-      if (key === '.' && value.includes('.')) return
-      setValue((prev) => prev + key)
-    }
-  }
+  console.log({ infoPay })
 
   return (
     <section
@@ -85,7 +60,18 @@ const HomePage = () => {
         >
           {step === 'enter-pay' && <EnterPay onActivity={() => setStep('history')} onNewSale={() => setStep('enter-amount')} />}
           {step === 'enter-amount' && (
-            <EnterAmount setValue={handleKeyPress} value={value} onBack={() => setStep('enter-pay')} onNext={(_amount) => setStep('qr')} />
+            <EnterAmount
+              setValue={setValue}
+              value={value}
+              onBack={() => setStep('enter-pay')}
+              onNext={(infoPay) => {
+                setInfoPay(infoPay)
+                setStep('qr')
+              }}
+            />
+          )}
+          {step === 'qr' && infoPay && (
+            <QrPay amount={value} infoPay={infoPay} onBack={() => setStep('enter-amount')} onClose={() => setStep('enter-pay')} />
           )}
         </div>
       </div>

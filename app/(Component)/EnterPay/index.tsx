@@ -3,23 +3,11 @@ import { PlusSquare, History } from 'lucide-react'
 
 import ContainerContent from '../ContainerContent'
 
-import PossServices from '@/services/API/poss'
-
 type Props = {
   onNewSale: () => void
   onActivity: () => void
 }
 const EnterPay = ({ onNewSale, onActivity }: Props) => {
-  const testApi = async () => {
-    try {
-      const res = await PossServices.createPayment('100')
-
-      console.log({ res })
-    } catch (error) {
-      console.log({ error })
-    }
-  }
-
   return (
     <ContainerContent>
       <div className='flex flex-col gap-8 items-center justify-between w-full h-full'>
@@ -43,7 +31,7 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
         <div className='flex flex-col flex-1 gap-6 w-full '>
           <button
             className='w-full flex-1 flex  cursor-pointer  bg-[#1f2937] hover:bg-[#374151] transition-all rounded-[24px]   flex-col items-center justify-center gap-3 shadow-xl'
-            onClick={testApi}
+            onClick={onNewSale}
           >
             <PlusSquare className='w-10 h-10 text-slate-400' strokeWidth={1.5} />
             <span className='text-sm text-slate-300 font-medium'>New Sale</span>

@@ -1,19 +1,59 @@
 'use client'
 
 import React, { useState } from 'react'
+import Bignumber from 'bignumber.js'
 import { Delete, ChevronLeft } from 'lucide-react'
 
 import ContainerContent from '../ContainerContent'
 
+import { cn } from '@/utils/tailwind'
+import MyButton from '@/components/MyButton'
+import PossServices, { InfoPay } from '@/services/API/poss'
+
 type Props = {
   onBack: () => void
-  onNext: (amount: string) => void
+  onNext: (infoPay: InfoPay) => void
   value: string
   setValue: (value: string) => void
 }
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', 'back']
 
 const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
-  const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', 'back']
+  const [loading, setLoading] = useState(false)
+
+  const handleKeyPress = (key: string) => {
+    if (key === 'back') {
+      if (value.length <= 1 || value === '0' || value === '0.0') {
+        setValue('0')
+      } else {
+        setValue(value.slice(0, value.length - 1))
+      }
+
+      return
+    }
+    if (key === '0' && value === '0') {
+      return
+    }
+
+    if (value === '0') {
+      if (key === '.') {
+        setValue('0.')
+      } else {
+        setValue(key)
+      }
+    } else {
+      if (key === '.' && value.includes('.')) return
+      setValue(`${value}${key}`)
+    }
+  }
+
+  const handleSubmit = async () => {
+    setLoading(true)
+    const res = await PossServices.createPayment(value)
+
+    setLoading(false)
+    onNext(res)
+  }
 
   return (
     <ContainerContent>
@@ -46,7 +86,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
               <button
                 key={key}
                 className='flex items-center justify-center h-8 bg-[#1f2937] hover:bg-[#374151] active:scale-95 transition-all rounded-[12px] text-xl font-medium shadow-md cursor-pointer'
-                onClick={() => setValue(key)}
+                onClick={() => handleKeyPress(key)}
               >
                 {key === 'back' ? <Delete className='w-6 h-6 text-slate-300' /> : key}
               </button>
@@ -54,12 +94,16 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
           </div>
 
           {/* Action Button */}
-          <button
-            className='w-full py-3 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[16px] text-slate-300 font-semibold text-base shadow-lg cursor-pointer'
-            onClick={() => onNext(value)}
+          <MyButton
+            className={cn(
+              'w-full py-3 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[16px] text-slate-300 font-semibold text-base shadow-lg ',
+              Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
+            )}
+            disabled={Bignumber(value || '0').lte(0) || loading}
+            onClick={handleSubmit}
           >
-            Enter Amount
-          </button>
+            {loading ? 'Loading...' : 'Enter Amount'}
+          </MyButton>
         </div>
       </div>
     </ContainerContent>

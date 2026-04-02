@@ -1,7 +1,8 @@
 export const images = {
   favicon: '/favicon.ico',
-  logo: '/logo_tc_store.png',
+  logo: '/logo512.png',
   icons: {
+    walletConnect: '/assets/images/icons/walletConnect.png',
     avatarDefault: '/assets/images/icons/avatarDefault.png',
     iconZalo: '/assets/images/icons/iconZalo.png',
     iconHome: '/assets/images/icons/iconHome.png',

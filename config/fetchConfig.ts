@@ -13,6 +13,7 @@ export type ServerAPIReqType = {
   isAuth?: boolean
   baseURL?: string
   noRefreshToken?: boolean
+  headers?: any
 }
 
 export type ClientAPITypeParam = ServerAPIReqType
@@ -48,6 +49,7 @@ const fetchConfig = async ({
   method = REQUEST_TYPE.GET,
   timeOut = 70000,
   baseURL,
+  headers,
 }: ServerAPIReqType): Promise<{ data: any; error?: any; messages: any }> => {
   const config: any = {
     baseURL: baseURL || process.env.NEXT_PUBLIC_API_APP,
@@ -58,6 +60,7 @@ const fetchConfig = async ({
       'Content-Type': 'application/json',
       'x-api-key': POSS_CONFIG.API_KEY,
       'x-merchant-id': POSS_CONFIG.MERCHANT_ID,
+      ...headers,
     },
     signal: AbortSignal.timeout(timeOut),
     // withCredentials: true,

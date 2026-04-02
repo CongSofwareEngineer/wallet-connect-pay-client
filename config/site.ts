@@ -1,8 +1,8 @@
 export const SITE_CONFIG = {
-  title: 'Hồ Diên Công',
-  description: 'I am A Software Engineer. I can build websites, app mobile and API service that best to you',
+  title: 'Wallet Connect Pay Client',
+  description: 'Wallet Connect Pay Client',
   images: '/favicon.ico',
   icon: '/favicon.ico',
-  keywords: ['Hồ Diên Công', 'Công', 'Software Engineer', 'Công front end', 'Công full stack', 'Reactjs', 'React native', 'Website'],
-  url: 'https://hdcong.vercel.app/',
+  keywords: ['Wallet Connect Pay Client', 'Wallet Connect', 'Pay', 'Wallet Connect Pay'],
+  url: 'https://wallet-connect-pay-client.vercel.app/',
 }
