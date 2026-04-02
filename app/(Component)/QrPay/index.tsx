@@ -73,11 +73,6 @@ const QrPay = ({ amount, onBack, onClose, infoPay }: Props) => {
               }}
             // viewBox={`0 0 256 256`}
             />
-            {seconds <= 0 && (
-              <div className='absolute inset-0 bg-black/70 flex items-center justify-center'>
-                <p className='text-white text-xl font-bold'>Expired</p>
-              </div>
-            )}
           </div>
 
           <div className='flex flex-col items-center gap-1 mt-6'>

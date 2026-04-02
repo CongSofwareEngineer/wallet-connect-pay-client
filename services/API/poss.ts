@@ -45,7 +45,7 @@ class PossServices {
     // }
   }
 
-  static async trackingPayment(paymentId: string, callback: (status: InfoTrackingPayment) => void): Promise<InfoTrackingPayment> {
+  static async trackingPayment(paymentId: string, callback: (status: InfoTrackingPayment) => void): Promise<void> {
     const res = await fetchConfig({
       url: `/api/poss`,
       method: 'POST',
