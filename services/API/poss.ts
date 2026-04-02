@@ -34,7 +34,7 @@ class PossServices {
       },
     })
 
-    return res?.data
+    return res?.data?.data || res?.data
     // return {
     //   paymentId: 'pay_4ca2ecc101KN67MJRFT0H344AKF8JHJS4C',
     //   status: 'requires_action',
@@ -55,13 +55,15 @@ class PossServices {
       },
     })
 
-    if (res?.data?.status === 'processing' || res?.data?.status === 'requires_action') {
+    const data = res?.data?.data || res?.data
+
+    if (data.status === 'processing' || data.status === 'requires_action') {
       await sleep(2000)
-      callback(res?.data?.status)
+      callback(data.status)
       await this.trackingPayment(paymentId, callback)
     }
 
-    callback(res?.data?.status)
+    callback(data.status)
   }
 }
 export default PossServices
