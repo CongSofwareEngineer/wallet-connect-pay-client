@@ -12,7 +12,7 @@ export type InfoPay = {
   gatewayUrl: string
 }
 
-export type InfoTrackingPayment = 'requires_action' | 'processing' | 'succeeded' | 'failed' | 'expired' | 'cancelled'
+export type InfoTrackingPayment = 'requires_action' | 'processing' | 'success' | 'failed' | 'expired' | 'cancelled'
 
 class PossServices {
   static async createPayment(value: string): Promise<InfoPay> {
@@ -55,15 +55,17 @@ class PossServices {
       },
     })
 
-    const data = res?.data?.data || res?.data
+    const status = res?.data?.data?.status || res?.data?.status
 
-    if (data.status === 'processing' || data.status === 'requires_action') {
+    console.log({ status })
+
+    if (status === 'processing' || status === 'requires_action') {
       await sleep(2000)
-      callback(data.status)
+      callback(status)
       await this.trackingPayment(paymentId, callback)
     }
 
-    callback(data.status)
+    callback(status)
   }
 }
 export default PossServices
