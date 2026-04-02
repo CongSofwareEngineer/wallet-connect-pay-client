@@ -25,6 +25,7 @@ class PossServices {
     }
 
     const res = await fetchConfig({
+      baseURL: 'https://wallet-connect-pay-client.vercel.app',
       url: `/api/poss`,
       method: 'POST',
       body: {
@@ -47,6 +48,7 @@ class PossServices {
 
   static async trackingPayment(paymentId: string, callback: (status: InfoTrackingPayment) => void): Promise<void> {
     const res = await fetchConfig({
+      baseURL: 'https://wallet-connect-pay-client.vercel.app',
       url: `/api/poss`,
       method: 'POST',
       body: {
