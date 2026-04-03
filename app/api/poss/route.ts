@@ -20,14 +20,10 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const endpoint = body.endpoint
-    const payload = {
-      referenceId: body.referenceId,
-      amount: {
-        value: body.value,
-        unit: 'iso4217/USD',
-      },
-    }
+    const chainType = body.chainType
 
+    delete body.chainType
+    delete body.endpoint
     let result
 
     const request: any = {
@@ -35,7 +31,7 @@ export async function POST(req: NextRequest) {
       headers: {
         origin: 'https://pos-demo.walletconnect.com',
         'x-api-key': POSS_CONFIG.API_KEY,
-        'x-merchant-id': PossUtils.getMerchantIdByChain(),
+        'x-merchant-id': PossUtils.getMerchantIdByChain(chainType),
       },
     }
 
@@ -43,7 +39,13 @@ export async function POST(req: NextRequest) {
       case 'payment':
         request.url = '/api/payment'
         request.method = 'POST'
-        request.body = payload
+        request.body = {
+          referenceId: body.referenceId,
+          amount: {
+            value: body.value,
+            unit: 'iso4217/USD',
+          },
+        }
         break
 
       case 'payment-status':
@@ -61,7 +63,6 @@ export async function POST(req: NextRequest) {
       case 'transactions':
         request.url = `/api/transactions?`
         request.method = 'GET'
-        delete body.endpoint
 
         Object.keys(body).forEach((key, index) => {
           request.url += `${key}=${body[key]}${index === Object.keys(body).length - 1 ? '' : '&'}`

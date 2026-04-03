@@ -1,9 +1,9 @@
 import { POSS_CONFIG } from '@/config/poss'
 export type ChainType = 'ethereum' | 'base' | 'optimism' | 'polygon' | 'arbitrum'
 class PossUtils {
-  private static chainType: ChainType = 'base'
-  static getMerchantIdByChain() {
-    switch (PossUtils.chainType) {
+  static chainType: ChainType = 'base'
+  static getMerchantIdByChain(chainType: ChainType) {
+    switch (chainType) {
       case 'ethereum':
         return POSS_CONFIG.MERCHANT_ID_ETHEREUM
       case 'base':
@@ -17,10 +17,6 @@ class PossUtils {
       default:
         return POSS_CONFIG.MERCHANT_ID_BASE
     }
-  }
-
-  static setChainType(chain: ChainType) {
-    PossUtils.chainType = chain
   }
 }
 

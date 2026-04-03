@@ -2,6 +2,7 @@ import { BigNumber } from 'bignumber.js'
 
 import fetchConfig from '@/config/fetchConfig'
 import { sleep } from '@/utils/functions'
+import PossUtils from '@/utils/poss'
 
 export type InfoPay = {
   paymentId: string
@@ -33,6 +34,7 @@ class PossServices {
         referenceId,
         value: amount.toString(),
         endpoint: 'payment',
+        chainType: PossUtils.chainType,
       },
     })
 
@@ -59,6 +61,7 @@ class PossServices {
       body: {
         paymentId,
         endpoint: `payment-status`,
+        chainType: PossUtils.chainType,
       },
     })
 
@@ -81,6 +84,7 @@ class PossServices {
       body: {
         paymentId,
         endpoint: `cancel-payment`,
+        chainType: PossUtils.chainType,
       },
     })
 
