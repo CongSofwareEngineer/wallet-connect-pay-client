@@ -31,7 +31,6 @@ export async function POST(req: NextRequest) {
 
     const request: any = {
       baseURL,
-      body: payload,
       headers: {
         origin: 'https://pos-demo.walletconnect.com',
       },
@@ -41,11 +40,30 @@ export async function POST(req: NextRequest) {
       case 'payment':
         request.url = '/api/payment'
         request.method = 'POST'
+        request.body = payload
         break
 
       case 'payment-status':
         request.url = `/api/payment-status?paymentId=${body.paymentId}`
         request.method = 'GET'
+        break
+
+      case 'cancel-payment':
+        request.url = `/api/cancel-payment?paymentId=${body.paymentId}`
+        request.method = 'POST'
+        request.body = {
+          paymentId: body.paymentId,
+        }
+        break
+      case 'transactions':
+        request.url = `/api/transactions?`
+        request.method = 'GET'
+        delete body.endpoint
+
+        Object.keys(body).forEach((key, index) => {
+          request.url += `${key}=${body[key]}${index === Object.keys(body).length - 1 ? '' : '&'}`
+        })
+
         break
 
       default:
