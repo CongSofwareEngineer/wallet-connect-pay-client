@@ -58,8 +58,6 @@ const fetchConfig = async ({
     method,
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': POSS_CONFIG.API_KEY,
-      'x-merchant-id': POSS_CONFIG.MERCHANT_ID,
       ...headers,
     },
     signal: AbortSignal.timeout(timeOut),

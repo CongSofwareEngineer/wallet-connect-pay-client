@@ -307,6 +307,7 @@
     "noFinances": "No financial records found"
   },
   "walletConnectPay": {
+    "selectChain": "Select chain",
     "paymentSuccessful": "Payment Successful",
     "newSale": "New Sale",
     "activity": "Activity",

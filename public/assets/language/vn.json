@@ -278,6 +278,7 @@
     "noFinances": "Không tìm thấy hồ sơ tài chính nào"
   },
   "walletConnectPay": {
+    "selectChain": "Chọn chuỗi",
     "paymentSuccessful": "Thanh toán thành công",
     "newSale": "Bán hàng mới",
     "activity": "Hoạt động",

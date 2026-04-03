@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server'
 
 import fetchConfig from '@/config/fetchConfig'
 import { POSS_CONFIG } from '@/config/poss'
+import PossUtils from '@/utils/poss'
 
 const baseURL = 'https://pos-demo.walletconnect.com'
 
@@ -33,6 +34,8 @@ export async function POST(req: NextRequest) {
       baseURL,
       headers: {
         origin: 'https://pos-demo.walletconnect.com',
+        'x-api-key': POSS_CONFIG.API_KEY,
+        'x-merchant-id': PossUtils.getMerchantIdByChain(),
       },
     }
 
