@@ -3,6 +3,7 @@ export const images = {
   logo: '/logo512.png',
   icons: {
     walletConnect: '/assets/images/icons/walletConnect.png',
+    walletConnectPay: '/assets/images/icons/walletConnectPay.png',
     avatarDefault: '/assets/images/icons/avatarDefault.png',
     iconZalo: '/assets/images/icons/iconZalo.png',
     iconHome: '/assets/images/icons/iconHome.png',

@@ -97,54 +97,14 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html suppressHydrationWarning lang='vi'>
-      {process.env.NEXT_PUBLIC_MODE_PRODUCTION && <GoogleTagManager gtmId='GTM-Z7WSP07S5Y' />}
-
-      <head>
-        {process.env.NEXT_PUBLIC_MODE_PRODUCTION && (
-          <>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  '@context': 'https://schema.org',
-                  '@type': 'Engineer',
-                  name: SITE_CONFIG.title,
-                  url: SITE_CONFIG.url,
-                  logo: SITE_CONFIG.images,
-                  description: SITE_CONFIG.description,
-                  address: {
-                    '@type': 'PostalAddress',
-                    streetAddress: 'Tân Bình',
-                    addressLocality: 'Sài Gòn',
-                    addressCountry: 'Việt nam',
-                  },
-                  contactPoint: {
-                    '@type': 'ContactPoint',
-                    telephone: '+84-392-225-405',
-                    contactType: 'hodiencong2000@gmail.com',
-                  },
-                }),
-              }}
-              type='application/ld+json'
-            />
-          </>
-        )}
-      </head>
       <body
         className={clsx(
-          inter.variable,
-          notoSans.variable,
-          monomaniacOne.variable,
+          // inter.variable,
+          // notoSans.variable,
+          // monomaniacOne.variable,
           'bg-web-main dark:bg-slate-900 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-900 dark:to-blue-900'
         )}
       >
-        {process.env.NEXT_PUBLIC_MODE_PRODUCTION && (
-          <noscript
-            dangerouslySetInnerHTML={{
-              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7S7DKJ4"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
-            }}
-          />
-        )}
         <ReactQueryProvider>
           <StyledComponentsRegistry>
             <HeroUIProvider themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
@@ -153,11 +113,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </StyledComponentsRegistry>
         </ReactQueryProvider>
       </body>
-      {process.env.NEXT_PUBLIC_MODE_PRODUCTION && (
-        <>
-          <GoogleAnalytics gaId='G-6PQHPT7TWN' />
-        </>
-      )}
     </html>
   )
 }

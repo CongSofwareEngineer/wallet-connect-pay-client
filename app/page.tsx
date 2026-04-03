@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import EnterPay from './(Component)/EnterPay'
 import EnterAmount from './(Component)/EnterAmount'
+import PaySuccess from './(Component)/PaySuccess'
 import QrPay from './(Component)/QrPay'
 
 import MyImage from '@/components/MyImage'
@@ -71,8 +72,15 @@ const HomePage = () => {
             />
           )}
           {step === 'qr' && infoPay && (
-            <QrPay amount={value} infoPay={infoPay} onBack={() => setStep('enter-amount')} onClose={() => setStep('enter-pay')} />
+            <QrPay
+              amount={value}
+              infoPay={infoPay}
+              onBack={() => setStep('enter-amount')}
+              onClose={() => setStep('enter-pay')}
+              onSuccess={() => setStep('success')}
+            />
           )}
+          {step === 'success' && <PaySuccess amount={value} onBack={() => setStep('enter-pay')} onNewSale={() => setStep('enter-amount')} />}
         </div>
       </div>
       {isBySizeWidth && <p>isBySizeWidth</p>}

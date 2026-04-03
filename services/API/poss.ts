@@ -59,8 +59,6 @@ class PossServices {
 
     const status = res?.data?.data?.status || res?.data?.status
 
-    console.log({ status })
-
     if (status === 'processing' || status === 'requires_action') {
       await sleep(2000)
       callback(status)
@@ -68,6 +66,20 @@ class PossServices {
     }
 
     callback(status)
+  }
+
+  static async cancelPayment(paymentId: string): Promise<InfoPay> {
+    const res = await fetchConfig({
+      baseURL: 'https://wallet-connect-pay-client.vercel.app',
+      url: `/api/poss`,
+      method: 'POST',
+      body: {
+        paymentId,
+        endpoint: `cancel-payment`,
+      },
+    })
+
+    return res?.data?.data || res?.data
   }
 }
 export default PossServices

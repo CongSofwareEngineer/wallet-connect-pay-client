@@ -5,6 +5,7 @@ import Bignumber from 'bignumber.js'
 import { Delete, ChevronLeft } from 'lucide-react'
 
 import ContainerContent from '../ContainerContent'
+import Header from '../ContainerContent/Header'
 
 import { cn } from '@/utils/tailwind'
 import MyButton from '@/components/MyButton'
@@ -58,12 +59,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   return (
     <ContainerContent>
       <div className='flex flex-col items-center justify-between w-full h-full overflow-hidden'>
-        {/* Top: Header w/ Back Button */}
-        <div className='w-full flex justify-start mb-2'>
-          <button className='p-2 hover:bg-slate-800/50 rounded-full transition-colors cursor-pointer' onClick={onBack}>
-            <ChevronLeft className='w-6 h-6 text-slate-400' />
-          </button>
-        </div>
+        <Header onBack={() => onBack()} />
 
         {/* Center: Amount and Text */}
         <div className='flex flex-col items-center justify-center flex-1 w-full gap-4'>

@@ -5,7 +5,7 @@ import { Spinner } from '@heroui/spinner'
 
 import PossServices, { InfoPay, InfoTrackingPayment } from '@/services/API/poss'
 
-function StatusPay({ infoPay }: { infoPay: InfoPay }) {
+function StatusPay({ infoPay, onSuccess }: { infoPay: InfoPay; onSuccess?: () => void }) {
   const [status, setStatus] = useState<InfoTrackingPayment>('requires_action')
 
   useEffect(() => {
@@ -13,10 +13,14 @@ function StatusPay({ infoPay }: { infoPay: InfoPay }) {
       PossServices.trackingPayment(infoPay.paymentId, (status) => {
         if (status) {
           setStatus(status)
+          if (status === 'success' || status === 'succeeded') {
+            onSuccess?.()
+          }
         }
       })
     }
-  }, [infoPay.paymentId])
+  }, [])
+  console.log({ status })
 
   if (status === 'requires_action' || !status) return null
 
@@ -65,17 +69,10 @@ function StatusPay({ infoPay }: { infoPay: InfoPay }) {
   const config = getStatusConfig()
 
   return (
-    <AnimatePresence>
-      <motion.div
-        animate={{ opacity: 1, scale: 1 }}
-        className='absolute inset-0 z-[1000] bg-[#111827]/90 rounded-[6px] flex flex-col items-center justify-center p-4 text-center'
-        exit={{ opacity: 0, scale: 0.9 }}
-        initial={{ opacity: 0, scale: 0.9 }}
-      >
-        <div className='mb-3'>{React.cloneElement(config.icon as React.ReactElement, { className: 'w-10 h-10 ' + config.color })}</div>
-        <h3 className={`text-sm font-bold ${config.color}`}>{config.text}</h3>
-      </motion.div>
-    </AnimatePresence>
+    <div className='absolute inset-0 z-[1000] bg-[#111827]/90 rounded-[6px] flex flex-col items-center justify-center p-4 text-center'>
+      {config.icon}
+      <h3 className={`text-sm font-bold ${config.color}`}>{config.text}</h3>
+    </div>
   )
 }
 
