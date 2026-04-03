@@ -9,6 +9,7 @@ import Header from '../ContainerContent/Header'
 
 import { cn } from '@/utils/tailwind'
 import MyButton from '@/components/MyButton'
+import useLanguage from '@/hooks/useLanguage'
 import PossServices, { InfoPay } from '@/services/API/poss'
 
 type Props = {
@@ -20,6 +21,7 @@ type Props = {
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', 'back']
 
 const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
+  const { translate } = useLanguage()
   const [loading, setLoading] = useState(false)
 
   const handleKeyPress = (key: string) => {
@@ -50,6 +52,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
 
   const handleSubmit = async () => {
     setLoading(true)
+    PossServices.isStopTracking = false
     const res = await PossServices.createPayment(value)
 
     setLoading(false)
@@ -60,46 +63,47 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
     <ContainerContent>
       <div className='flex flex-col items-center justify-between w-full h-full overflow-hidden'>
         <Header onBack={() => onBack()} />
-
-        {/* Center: Amount and Text */}
-        <div className='flex flex-col items-center justify-center flex-1 w-full gap-4'>
-          <p className='text-slate-300 text-sm font-light'>Enter amount to charge</p>
-          <div className='relative flex items-center justify-center'>
-            <div className='flex items-baseline'>
-              <span className='text-3xl font-bold text-slate-400 mb-2 mr-1'>$</span>
-              <span className='text-5xl font-bold tracking-tight'>{value}</span>
+        <div className='flex bg-[#1e293b]/50 rounded-tl-2xl rounded-tr-2xl p-4 flex-col items-center   w-full flex-1 justify-center'>
+          {/* Center: Amount and Text */}
+          <div className='flex flex-col items-center justify-center flex-1 w-full gap-4'>
+            <p className='  text-sm font-light'>{translate('walletConnectPay.enterAmountToCharge')}</p>
+            <div className='relative flex items-center justify-center'>
+              <div className='flex items-baseline'>
+                <span className='text-3xl font-bold text-slate-400 mb-2 mr-1'>$</span>
+                <span className='text-3xl font-bold text-slate-400 tracking-tight'>{value}</span>
+              </div>
+              {/* The red cursor line from the image */}
+              {/* <div className='absolute -right-3 h-[80%] w-[3px] bg-red-600 rounded-full' /> */}
             </div>
-            {/* The red cursor line from the image */}
-            {/* <div className='absolute -right-3 h-[80%] w-[3px] bg-red-600 rounded-full' /> */}
-          </div>
-        </div>
-
-        {/* Bottom: Pad and Button */}
-        <div className='w-full mt-auto space-y-4'>
-          {/* Keypad */}
-          <div className='grid grid-cols-3 gap-2 w-full'>
-            {keys.map((key) => (
-              <button
-                key={key}
-                className='flex items-center justify-center h-8 bg-[#1f2937] hover:bg-[#374151] active:scale-95 transition-all rounded-[12px] text-xl font-medium shadow-md cursor-pointer'
-                onClick={() => handleKeyPress(key)}
-              >
-                {key === 'back' ? <Delete className='w-6 h-6 text-slate-300' /> : key}
-              </button>
-            ))}
           </div>
 
-          {/* Action Button */}
-          <MyButton
-            className={cn(
-              'w-full py-3 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[16px] text-slate-300 font-semibold text-base shadow-lg ',
-              Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
-            )}
-            disabled={Bignumber(value || '0').lte(0) || loading}
-            onClick={handleSubmit}
-          >
-            {loading ? 'Loading...' : 'Enter Amount'}
-          </MyButton>
+          {/* Bottom: Pad and Button */}
+          <div className='w-full mt-auto space-y-4'>
+            {/* Keypad */}
+            <div className='grid grid-cols-3 gap-2 w-full'>
+              {keys.map((key) => (
+                <button
+                  key={key}
+                  className='flex items-center justify-center h-8 bg-[#1f2937] hover:bg-[#374151] active:scale-95 transition-all rounded-[6px] text-xl font-medium shadow-md cursor-pointer'
+                  onClick={() => handleKeyPress(key)}
+                >
+                  {key === 'back' ? <Delete className='w-6 h-6 text-slate-300' /> : key}
+                </button>
+              ))}
+            </div>
+
+            {/* Action Button */}
+            <MyButton
+              className={cn(
+                'w-full py-3 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[6px] text-slate-300 font-semibold text-base shadow-lg ',
+                Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
+              )}
+              disabled={Bignumber(value || '0').lte(0) || loading}
+              onClick={handleSubmit}
+            >
+              {loading ? translate('accounts.loading') : translate('walletConnectPay.enterAmount')}
+            </MyButton>
+          </div>
         </div>
       </div>
     </ContainerContent>

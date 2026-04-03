@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner } from '@heroui/spinner'
 
 import PossServices, { InfoPay, InfoTrackingPayment } from '@/services/API/poss'
+import useLanguage from '@/hooks/useLanguage'
 
 function StatusPay({ infoPay, onSuccess }: { infoPay: InfoPay; onSuccess?: () => void }) {
+  const { translate } = useLanguage()
   const [status, setStatus] = useState<InfoTrackingPayment>('requires_action')
 
   useEffect(() => {
@@ -29,32 +31,32 @@ function StatusPay({ infoPay, onSuccess }: { infoPay: InfoPay; onSuccess?: () =>
       case 'processing':
         return {
           icon: <Spinner className='text-blue-500' />,
-          text: 'Đang xử lý',
+          text: translate('walletConnectPay.status.processing'),
           color: 'text-blue-500',
         }
       case 'succeeded':
       case 'success':
         return {
           icon: <CheckCircle2 className='w-16 h-16 text-green-500' />,
-          text: 'Thanh toán thành công',
+          text: translate('walletConnectPay.status.succeeded'),
           color: 'text-green-500',
         }
       case 'failed':
         return {
           icon: <XCircle className='w-16 h-16 text-red-500' />,
-          text: 'Thanh toán thất bại',
+          text: translate('walletConnectPay.status.failed'),
           color: 'text-red-500',
         }
       case 'expired':
         return {
           icon: <Timer className='w-16 h-16 text-yellow-500' />,
-          text: 'Thanh toán hết hạn',
+          text: translate('walletConnectPay.status.expired'),
           color: 'text-yellow-500',
         }
       case 'cancelled':
         return {
           icon: <AlertCircle className='w-16 h-16 text-slate-400' />,
-          text: 'Thanh toán đã hủy',
+          text: translate('walletConnectPay.status.cancelled'),
           color: 'text-slate-400',
         }
       default:

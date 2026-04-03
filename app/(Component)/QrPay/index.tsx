@@ -11,6 +11,7 @@ import Header from '../ContainerContent/Header'
 import { images } from '@/config/images'
 import useCountdown from '@/hooks/useCountdown'
 import useSizePoss from '@/hooks/useSizePoss'
+import useLanguage from '@/hooks/useLanguage'
 import PossServices, { InfoPay } from '@/services/API/poss'
 
 type Props = {
@@ -22,10 +23,12 @@ type Props = {
 }
 
 const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
+  const { translate } = useLanguage()
   const { width } = useSizePoss()
   const { formattedTime } = useCountdown(900) // 15 minutes
 
   const handleCancel = async () => {
+    PossServices.isStopTracking = true
     PossServices.cancelPayment(infoPay.paymentId)
     onClose()
   }
@@ -35,8 +38,8 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
       <div className='flex flex-col items-center justify-between w-full h-full relative '>
         <Header onBack={() => onBack()} />
         {/* Content Card */}
-        <div className='flex bg-[#1e293b]/50 rounded-2xl p-4 flex-col items-center   w-full flex-1 justify-center'>
-          <p className='text-slate-400 text-base font-medium'>Scan to pay</p>
+        <div className='flex bg-[#1e293b]/50 rounded-tl-2xl rounded-tr-2xl p-4 flex-col items-center   w-full flex-1 justify-center'>
+          <p className='text-slate-400 text-base font-medium'>{translate('walletConnectPay.scanToPay')}</p>
           <div className='flex items-baseline mb-4'>
             <span className='text-2xl font-bold text-white mr-1'>$</span>
             <span className='text-2xl font-bold tracking-tight text-white'>{amount}</span>
@@ -59,13 +62,13 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
                 width: 40,
                 excavate: true,
               }}
-              // viewBox={`0 0 256 256`}
+            // viewBox={`0 0 256 256`}
             />
           </div>
 
           <div className='flex flex-col items-center gap-1 mt-6'>
             <p className='text-slate-400  '>
-              Payment expires in <span className='text-blue-500 font-bold'>{formattedTime}</span>
+              {translate('walletConnectPay.paymentExpiresIn')} <span className='text-blue-500 font-bold'>{formattedTime}</span>
             </p>
           </div>
           {/* Bottom Close Button */}

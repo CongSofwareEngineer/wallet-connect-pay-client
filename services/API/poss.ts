@@ -15,6 +15,7 @@ export type InfoPay = {
 export type InfoTrackingPayment = 'requires_action' | 'processing' | 'success' | 'succeeded' | 'failed' | 'expired' | 'cancelled'
 
 class PossServices {
+  static isStopTracking = false
   static async createPayment(value: string): Promise<InfoPay> {
     const amount = BigNumber(value).multipliedBy(100).toNumber()
     const characters = 'b240df9bcbc54f4b8fdd14902b63ac8c'
@@ -47,6 +48,10 @@ class PossServices {
   }
 
   static async trackingPayment(paymentId: string, callback: (status: InfoTrackingPayment) => void): Promise<void> {
+    if (PossServices.isStopTracking) {
+      return
+    }
+
     const res = await fetchConfig({
       baseURL: 'https://wallet-connect-pay-client.vercel.app',
       url: `/api/poss`,

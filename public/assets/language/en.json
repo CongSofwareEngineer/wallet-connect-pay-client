@@ -305,5 +305,23 @@
     "summaryError": "Could not load summary.",
     "subtitle": "Efficiently track and manage your financial records",
     "noFinances": "No financial records found"
+  },
+  "walletConnectPay": {
+    "paymentSuccessful": "Payment Successful",
+    "newSale": "New Sale",
+    "activity": "Activity",
+    "scanToPay": "Scan to pay",
+    "paymentExpiresIn": "Payment expires in",
+    "enterAmountToCharge": "Enter amount to charge",
+    "enterAmount": "Enter Amount",
+    "posApp": "POS App",
+    "pay": "Pay",
+    "status": {
+      "processing": "Processing",
+      "succeeded": "Payment Successful",
+      "failed": "Payment Failed",
+      "expired": "Payment Expired",
+      "cancelled": "Payment Cancelled"
+    }
   }
 }

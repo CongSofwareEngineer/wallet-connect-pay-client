@@ -1,7 +1,7 @@
 import '@/styles/aos.css'
 import '@/styles/globals.scss'
 import '@/styles/overrides.scss'
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google'
 import clsx from 'clsx'
 import { Metadata, Viewport } from 'next'
 import { Inter, Monomaniac_One, Sansita } from 'next/font/google'

@@ -277,6 +277,24 @@
     "subtitle": "Theo dõi và quản lý hiệu quả hồ sơ tài chính của bạn",
     "noFinances": "Không tìm thấy hồ sơ tài chính nào"
   },
+  "walletConnectPay": {
+    "paymentSuccessful": "Thanh toán thành công",
+    "newSale": "Bán hàng mới",
+    "activity": "Hoạt động",
+    "scanToPay": "Quét để thanh toán",
+    "paymentExpiresIn": "Thanh toán hết hạn sau",
+    "enterAmountToCharge": "Nhập số tiền cần tính phí",
+    "enterAmount": "Nhập số tiền",
+    "posApp": "Ứng dụng POS",
+    "pay": "Thanh toán",
+    "status": {
+      "processing": "Đang xử lý",
+      "succeeded": "Thanh toán thành công",
+      "failed": "Thanh toán thất bại",
+      "expired": "Thanh toán hết hạn",
+      "cancelled": "Thanh toán đã hủy"
+    }
+  },
   "footer": {
     "aboutUs": "Về chúng tôi",
     "address": "83/41, Phạm Văn Bạch, P.15, Tân Bình, TP.HCM"
