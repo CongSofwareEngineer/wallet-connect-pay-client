@@ -33,7 +33,7 @@ const HomePage = () => {
         isBySizeHeight ? 'h-full' : 'w-full'
       )}
     >
-      <div className={cn('relative flex items-center justify-center', isBySizeWidth && 'w-full', isBySizeHeight && 'h-full')}>
+      <div className={cn('relative md:py-2 py-3 flex items-center justify-center', isBySizeWidth && 'w-full', isBySizeHeight && 'h-full')}>
         <MyImage
           alt='possCase'
           className={cn(
