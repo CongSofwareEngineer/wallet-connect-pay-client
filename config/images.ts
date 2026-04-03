@@ -2,7 +2,9 @@ export const images = {
   favicon: '/favicon.ico',
   logo: '/logo512.png',
   icons: {
+    iconWalletConnect: '/assets/images/icons/iconWalletConnect.png',
     walletConnect: '/assets/images/icons/walletConnect.png',
+    walletConnectLogo: '/assets/images/icons/walletConnectLogo.png',
     walletConnectPay: '/assets/images/icons/walletConnectPay.png',
     avatarDefault: '/assets/images/icons/avatarDefault.png',
     iconZalo: '/assets/images/icons/iconZalo.png',

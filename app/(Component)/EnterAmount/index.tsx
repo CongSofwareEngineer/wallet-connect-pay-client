@@ -84,10 +84,10 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
               {keys.map((key) => (
                 <button
                   key={key}
-                  className='flex items-center justify-center h-8 bg-[#1f2937] hover:bg-[#374151] active:scale-95 transition-all rounded-[6px] text-xl font-medium shadow-md cursor-pointer'
+                  className='flex items-center justify-center h-8 bg-[#1f2937] hover:bg-[#374151] active:scale-95 transition-all rounded-[6px]  font-medium shadow-md cursor-pointer'
                   onClick={() => handleKeyPress(key)}
                 >
-                  {key === 'back' ? <Delete className='w-6 h-6 text-slate-300' /> : key}
+                  {key === 'back' ? <Delete className='w-4 h-4 text-slate-300' /> : key}
                 </button>
               ))}
             </div>
@@ -95,7 +95,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
             {/* Action Button */}
             <MyButton
               className={cn(
-                'w-full py-3 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[6px] text-slate-300 font-semibold text-base shadow-lg ',
+                'w-full py-0 md:py-3 md:min-h-12 min-h-0 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[6px] text-slate-300 font-semibold shadow-lg ',
                 Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
               )}
               disabled={Bignumber(value || '0').lte(0) || loading}

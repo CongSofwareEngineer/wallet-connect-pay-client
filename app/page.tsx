@@ -26,19 +26,19 @@ const HomePage = () => {
   return (
     <section
       className={cn(
-        'bg-web-main flex justify-center flex-col items-center w-full min-h-screen h-svh',
+        'bg-web-main flex justify-center flex-col items-center w-full h-full min-h-screen ',
         isBySizeWidth ? 'w-full' : 'h-full',
         isBySizeHeight ? 'h-full' : 'w-full'
       )}
     >
-      <div className={cn(' relative flex items-center justify-center', isBySizeWidth && 'w-full', isBySizeHeight && 'h-full')}>
+      <div className={cn('relative flex items-center justify-center', isBySizeWidth && 'w-full', isBySizeHeight && 'h-full')}>
         <MyImage
           alt='possCase'
           className={cn(
             'poss-case',
-            ' w-full !z-99 object-contain !max-w-[600px]  !max-h-[1000px] ',
-            isBySizeWidth && '!w-[calc(100dvh-100px)] !h-auto',
-            isBySizeHeight && '!w-auto !h-[calc(100dvh-100px)]'
+            ' !z-99 object-contain !max-w-[100dvw]  !max-h-[100dvh] ',
+            isBySizeWidth && 'md:!w-[calc(100dvh-100px)] !w-[calc(100dvh-10px)] !h-auto',
+            isBySizeHeight && 'md:!w-auto !w-full md:!h-[calc(100dvh-100px)] !h-[calc(100dvh-10px)]'
           )}
           src={images.home.possCase}
           style={{

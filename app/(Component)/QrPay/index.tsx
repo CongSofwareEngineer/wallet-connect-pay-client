@@ -33,10 +33,16 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
     onClose()
   }
 
+  const handleBack = async () => {
+    PossServices.isStopTracking = true
+    PossServices.cancelPayment(infoPay.paymentId)
+    onBack()
+  }
+
   return (
     <ContainerContent>
       <div className='flex flex-col items-center justify-between w-full h-full relative '>
-        <Header onBack={() => onBack()} />
+        <Header onBack={() => handleBack()} />
         {/* Content Card */}
         <div className='flex bg-[#1e293b]/50 rounded-tl-2xl rounded-tr-2xl p-4 flex-col items-center   w-full flex-1 justify-center'>
           <p className='text-slate-400 text-base font-medium'>{translate('walletConnectPay.scanToPay')}</p>
@@ -55,7 +61,7 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
               style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
               value={infoPay.gatewayUrl}
               imageSettings={{
-                src: images.icons.walletConnect,
+                src: images.icons.iconWalletConnect,
                 x: undefined,
                 y: undefined,
                 height: 40,
