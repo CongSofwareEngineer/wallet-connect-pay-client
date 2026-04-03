@@ -6,12 +6,15 @@ import { ArrowLeft } from 'lucide-react'
 
 import { images } from '@/config/images'
 import MyImage from '@/components/MyImage'
+import useSizePoss from '@/hooks/useSizePoss'
 
 type Props = {
   onBack?: () => void
 }
 
 function Header({ onBack }: Props) {
+  const { width } = useSizePoss()
+
   return (
     <div className='flex w-full items-center justify-between p-1'>
       <button className='rounded-full p-2 transition-colors hover:bg-slate-800/50 cursor-pointer active:scale-90' onClick={onBack}>

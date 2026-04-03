@@ -7,6 +7,8 @@ import { ChevronLeft, X } from 'lucide-react'
 import ContainerContent from '../ContainerContent'
 import StatusPay from '../StatusPay'
 import Header from '../ContainerContent/Header'
+import Div from '../ContainerContent/Div'
+import Span from '../ContainerContent/Span'
 
 import { images } from '@/config/images'
 import useCountdown from '@/hooks/useCountdown'
@@ -45,10 +47,14 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
         <Header onBack={() => handleBack()} />
         {/* Content Card */}
         <div className='flex bg-[#1e293b]/50 rounded-tl-2xl rounded-tr-2xl p-4 flex-col items-center   w-full flex-1 justify-center'>
-          <p className='text-slate-400 text-base font-medium'>{translate('walletConnectPay.scanToPay')}</p>
+          <Div className='text-slate-400  font-medium'>{translate('walletConnectPay.scanToPay')}</Div>
           <div className='flex items-baseline mb-4'>
-            <span className='text-2xl font-bold text-white mr-1'>$</span>
-            <span className='text-2xl font-bold tracking-tight text-white'>{amount}</span>
+            <Span className='font-bold text-white mr-1' style={{ fontSize: 16 }}>
+              $
+            </Span>
+            <Span className='font-bold tracking-tight text-white' style={{ fontSize: 16 }}>
+              {amount}
+            </Span>
           </div>
 
           <div className='relative bg-white p-2 rounded-[6px] shadow-[0_20px_50px_rgba(0,0,0,0.5)]  '>
@@ -73,17 +79,26 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
           </div>
 
           <div className='flex flex-col items-center gap-1 mt-6'>
-            <p className='text-slate-400  '>
-              {translate('walletConnectPay.paymentExpiresIn')} <span className='text-blue-500 font-bold'>{formattedTime}</span>
-            </p>
+            <Span className='text-slate-400  '>
+              {translate('walletConnectPay.paymentExpiresIn')} <Span className='text-blue-500 font-bold'>{formattedTime}</Span>
+            </Span>
           </div>
           {/* Bottom Close Button */}
           <div className='pb-1 w-full flex flex-1 justify-center items-end'>
             <button
-              className='w-10 h-10  p-2 flex items-center justify-center bg-[#1e293b]/80 hover:bg-[#334155]/80 active:scale-90 transition-all rounded-full cursor-pointer border border-slate-700/50 shadow-xl'
+              className=' flex items-center justify-center bg-[#1e293b]/80 hover:bg-[#334155]/80 active:scale-90 transition-all rounded-full cursor-pointer border border-slate-700/50 shadow-xl'
+              style={{
+                padding: width * 0.03,
+              }}
               onClick={handleCancel}
             >
-              <X className='w-5 h-5 text-slate-400' />
+              <X
+                className='  text-slate-400'
+                style={{
+                  width: width * 0.05,
+                  height: width * 0.05,
+                }}
+              />
             </button>
           </div>
         </div>
