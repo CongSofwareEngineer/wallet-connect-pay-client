@@ -5,6 +5,16 @@ import { POSS_CONFIG } from '@/config/poss'
 
 const baseURL = 'https://pos-demo.walletconnect.com'
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-api-key',
+}
+
+export async function OPTIONS() {
+  return Response.json({}, { headers: corsHeaders })
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -45,8 +55,8 @@ export async function POST(req: NextRequest) {
 
     result = await fetchConfig(request)
 
-    return Response.json({ ...result })
+    return Response.json({ ...result }, { headers: corsHeaders })
   } catch (error) {
-    return Response.json({ error: 'Lỗi mã hóa' }, { status: 500 })
+    return Response.json({ error: 'Lỗi mã hóa' }, { status: 500, headers: corsHeaders })
   }
 }
