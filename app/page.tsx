@@ -13,8 +13,10 @@ import useSizePoss from '@/hooks/useSizePoss'
 import useSizeScreen from '@/hooks/useSizeScreen'
 import { cn } from '@/utils/tailwind'
 import { InfoPay } from '@/services/API/poss'
+import useMedia from '@/hooks/useMedia'
 type Step = 'enter-pay' | 'enter-pin' | 'enter-amount' | 'qr' | 'success' | 'history'
 const HomePage = () => {
+  const { isMobile } = useMedia()
   const [step, setStep] = useState<Step>('enter-pay')
   const { isBySizeWidth, isBySizeHeight } = useSizeScreen()
   const { reSize, height, width } = useSizePoss()
@@ -36,9 +38,10 @@ const HomePage = () => {
           alt='possCase'
           className={cn(
             'poss-case',
-            ' !z-99 object-contain !max-w-[100dvw]  !max-h-[100dvh] ',
-            isBySizeWidth && 'md:!w-[calc(100dvh-100px)] !w-[calc(100dvh-10px)] !h-auto',
-            isBySizeHeight && 'md:!w-auto !w-full md:!h-[calc(100dvh-100px)] !h-[calc(100dvh-10px)]'
+            isMobile && ' !z-99 object-contain !w-screen !h-auto',
+            !isMobile && ' !z-99 object-contain !max-w-[100dvw]  !max-h-[100dvh] ',
+            isBySizeWidth && !isMobile && 'md:!w-[calc(100dvh-100px)] !w-[calc(100dvh-10px)] !h-auto',
+            isBySizeHeight && !isMobile && 'md:!w-auto !w-full md:!h-[calc(100dvh-100px)] !h-[calc(100dvh-10px)]'
           )}
           src={images.home.possCase}
           style={{
@@ -50,6 +53,7 @@ const HomePage = () => {
             }, 1000)
           }}
         />
+
         <div
           className='absolute bg-black    z-999 flex justify-end items-end '
           style={{
