@@ -48,10 +48,10 @@ type Props = {
 const EnterPay = ({ onNewSale, onActivity }: Props) => {
   const { width } = useSizePoss()
   const { translate } = useLanguage()
-  const [selectedChain, setSelectedChain] = useState<ChainType>('base')
+  const [selectedChain, setSelectedChain] = useState<ChainType>(PossUtils.chainType)
   const onChangeChain = (chain: ChainType) => {
     setSelectedChain(chain)
-    PossUtils.setChainType(chain)
+    PossUtils.chainType = chain
   }
 
   return (
