@@ -74,28 +74,42 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
           <div className='w-full relative flex flex-col gap-3 px-1  '>
             <Div className=' font-medium text-slate-500   tracking-wider leading-none'>{translate('walletConnectPay.selectChain')}</Div>
             <div
-              className='flex   items-center gap-4 overflow-x-auto no-scrollbar scroll-smooth'
+              className='flex   items-center  overflow-x-auto no-scrollbar scroll-smooth'
               style={{
                 paddingBottom: heightContent * 0.03,
+                gap: widthContent * 0.04,
               }}
             >
               {chains.map((chain) => (
                 <button
                   key={chain.chainType}
-                  className={`relative flex-shrink-0  rounded-full p-[2px] transition-all duration-200 active:scale-90 ${selectedChain === chain.chainType ? 'bg-blue-500' : 'bg-transparent hover:bg-white/5'
+                  className={`relative flex-shrink-0  rounded-full p-[1px] transition-all duration-200 active:scale-90 ${selectedChain === chain.chainType ? 'bg-blue-500' : 'bg-transparent hover:bg-white/5'
                     }`}
                   style={{
-                    width: width * 0.1,
-                    height: width * 0.1,
+                    width: widthContent * 0.13,
+                    height: widthContent * 0.13,
                   }}
                   onClick={() => onChangeChain(chain.chainType)}
                 >
-                  <div className='w-full h-full rounded-full overflow-hidden bg-slate-900 border border-slate-700/50 shadow-inner'>
-                    <Image alt={chain.name} height={48} src={chain.icon} width={48} />
+                  <div className='w-full h-full rounded-full   bg-slate-900 border border-slate-700/50 shadow-inner'>
+                    <Image alt={chain.name} height={widthContent * 0.12} src={chain.icon} width={widthContent * 0.12} />
                   </div>
                   {selectedChain === chain.chainType && (
-                    <div className='absolute -top-0.5 -right-0.5 bg-blue-500 rounded-full p-[2px] border-2 border-[#111827] shadow-sm'>
-                      <Check className='w-2.5 h-2.5 text-white' strokeWidth={4} />
+                    <div
+                      className='absolute   bg-blue-500 rounded-full p-[2px] border-[#111827] shadow-sm'
+                      style={{
+                        top: 0,
+                        right: -widthContent * 0.01,
+                      }}
+                    >
+                      <Check
+                        className='  text-white'
+                        strokeWidth={4}
+                        style={{
+                          width: widthContent * 0.04,
+                          height: widthContent * 0.04,
+                        }}
+                      />
                     </div>
                   )}
                 </button>
