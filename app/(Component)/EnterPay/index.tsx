@@ -55,8 +55,6 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
     PossUtils.chainType = chain
   }
 
-  console.log({ heightContent })
-
   return (
     <ContainerContent>
       <div className='flex flex-col   items-center justify-between w-full h-full'>
@@ -108,7 +106,7 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
               }}
               onClick={onNewSale}
             >
-              <div className='bg-[#111827]/40   border border-white/5 group-hover:scale-110 transition-transform'>
+              <div className=' group-hover:scale-110 transition-transform'>
                 <PlusSquare className='w-6 h-6 text-slate-400' strokeWidth={1.5} />
               </div>
               <Div className='text-sm text-slate-300 font-medium tracking-wide'>{translate('walletConnectPay.newSale')}</Div>
@@ -121,7 +119,7 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
               }}
               onClick={onActivity}
             >
-              <div className='bg-[#111827]/40   border border-white/5 group-hover:scale-110 transition-transform'>
+              <div className=' group-hover:scale-110 transition-transform'>
                 <History className='w-6 h-6 text-slate-400' strokeWidth={1.5} />
               </div>
               <Div className='text-sm text-slate-300 font-medium tracking-wide'>{translate('walletConnectPay.activity')}</Div>
