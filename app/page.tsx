@@ -22,8 +22,14 @@ const HomePage = () => {
   const { reSize, height, width } = useSizePoss()
   const [value, setValue] = useState('0')
   const [infoPay, setInfoPay] = useState<InfoPay | null>(null)
-
-  console.log({ infoPay })
+  // const [infoPay, setInfoPay] = useState<InfoPay | null>({
+  //   paymentId: 'pay_cda2ecc101KNR3ZFBQ5CQR24T6BKN4GP4G',
+  //   status: 'success',
+  //   expiresAt: 1775705618,
+  //   isFinal: false,
+  //   pollInMs: 1000,
+  //   gatewayUrl: 'https://pay.walletconnect.com/?pid=pay_cda2ecc101KNR3ZFBQ5CQR24T6BKN4GP4G',
+  // })
 
   return (
     <section
@@ -63,7 +69,7 @@ const HomePage = () => {
             bottom: height * 0.05932203389,
           }}
         >
-          {step === 'enter-pay' && <EnterPay onActivity={() => setStep('history')} onNewSale={() => setStep('enter-amount')} />}
+          {step === 'enter-pay' && <EnterPay onActivity={() => setStep('success')} onNewSale={() => setStep('enter-amount')} />}
           {step === 'enter-amount' && (
             <EnterAmount
               setValue={setValue}

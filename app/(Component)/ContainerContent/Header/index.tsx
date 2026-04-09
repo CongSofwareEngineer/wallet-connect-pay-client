@@ -13,16 +13,32 @@ type Props = {
 }
 
 function Header({ onBack }: Props) {
-  const { width } = useSizePoss()
+  const { heightContent } = useSizePoss()
 
   return (
-    <div className='flex w-full items-center justify-between p-1'>
-      <button className='rounded-full p-2 transition-colors hover:bg-slate-800/50 cursor-pointer active:scale-90' onClick={onBack}>
-        <ArrowLeft className='h-6  text-slate-400' />
+    <div
+      className='flex w-full items-center justify-between '
+      style={{
+        padding: heightContent * 0.01,
+      }}
+    >
+      <button className='rounded-full  transition-colors hover:bg-slate-800/50 cursor-pointer active:scale-90' onClick={onBack}>
+        <ArrowLeft
+          className='  text-slate-400'
+          style={{
+            height: heightContent * 0.04,
+          }}
+        />
       </button>
 
       <div className='flex items-center gap-1.5 px-3 py-1.5'>
-        <MyImage alt='WalletConnect' className='!h-5 !w-auto' quality={100} src={images.icons.walletConnect} />
+        <img
+          alt='WalletConnect'
+          src={images.icons.walletConnect}
+          style={{
+            height: heightContent * 0.035,
+          }}
+        />
         {/* <span className='text-xl font-bold text-white tracking-tight'>Pay</span> */}
       </div>
     </div>

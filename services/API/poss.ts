@@ -3,17 +3,22 @@ import { BigNumber } from 'bignumber.js'
 import fetchConfig from '@/config/fetchConfig'
 import { sleep } from '@/utils/functions'
 import PossUtils from '@/utils/poss'
+export type InfoTrackingPayment = 'requires_action' | 'processing' | 'success' | 'succeeded' | 'failed' | 'expired' | 'cancelled'
 
 export type InfoPay = {
   paymentId: string
-  status: string
+  status: InfoTrackingPayment
   expiresAt: number
   isFinal: boolean
   pollInMs: number
   gatewayUrl: string
 }
 
-export type InfoTrackingPayment = 'requires_action' | 'processing' | 'success' | 'succeeded' | 'failed' | 'expired' | 'cancelled'
+const config: any = {}
+
+if (process.env.NEXT_PUBLIC_ENV === 'development') {
+  config.baseURL = 'https://wallet-connect-pay-client.vercel.app'
+}
 
 class PossServices {
   static isStopTracking = false
@@ -27,7 +32,7 @@ class PossServices {
     }
 
     const res = await fetchConfig({
-      baseURL: 'https://wallet-connect-pay-client.vercel.app',
+      ...config,
       url: `/api/poss`,
       method: 'POST',
       body: {
@@ -55,7 +60,7 @@ class PossServices {
     }
 
     const res = await fetchConfig({
-      baseURL: 'https://wallet-connect-pay-client.vercel.app',
+      ...config,
       url: `/api/poss`,
       method: 'POST',
       body: {
@@ -66,6 +71,8 @@ class PossServices {
     })
 
     const status = res?.data?.data?.status || res?.data?.status
+
+    console.log({ trackingPayment: status })
 
     if (status === 'processing' || status === 'requires_action') {
       await sleep(2000)
@@ -78,7 +85,7 @@ class PossServices {
 
   static async cancelPayment(paymentId: string): Promise<InfoPay> {
     const res = await fetchConfig({
-      baseURL: 'https://wallet-connect-pay-client.vercel.app',
+      ...config,
       url: `/api/poss`,
       method: 'POST',
       body: {

@@ -37,7 +37,14 @@ const useSizePoss = () => {
     }
   }, [reSize])
 
-  return { size: sizeScreen, reSize, width: sizeScreen.width, height: sizeScreen.height }
+  return {
+    size: sizeScreen,
+    widthContent: sizeScreen.width * 0.82,
+    heightContent: sizeScreen.height * 0.66,
+    reSize,
+    width: sizeScreen.width,
+    height: sizeScreen.height,
+  }
 }
 
 export default useSizePoss

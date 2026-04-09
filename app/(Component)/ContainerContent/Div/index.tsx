@@ -10,7 +10,7 @@ const Div = ({ children, className, style, ...props }: HtmlHTMLAttributes<HTMLDi
 
     switch (size) {
       case 12:
-        return width * 0.1
+        return width * 0.045
       case 14:
         return width * 0.05
       case 16:

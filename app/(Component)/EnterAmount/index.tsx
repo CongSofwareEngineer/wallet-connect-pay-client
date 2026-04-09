@@ -7,6 +7,7 @@ import { Delete, ChevronLeft } from 'lucide-react'
 import ContainerContent from '../ContainerContent'
 import Header from '../ContainerContent/Header'
 import Div from '../ContainerContent/Div'
+import Span from '../ContainerContent/Span'
 
 import { cn } from '@/utils/tailwind'
 import MyButton from '@/components/MyButton'
@@ -74,12 +75,12 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
             </p>
             <div className='relative flex items-center justify-center'>
               <div className='flex items-baseline'>
-                <span className='font-bold text-slate-400 mb-2 mr-1' style={{ fontSize: width * 0.1 }}>
+                <Span className='font-bold text-slate-400 mb-2 mr-1' style={{ fontSize: 16 }}>
                   $
-                </span>
-                <span className='font-bold text-slate-400 tracking-tight' style={{ fontSize: width * 0.1 }}>
+                </Span>
+                <Span className='font-bold text-slate-400 tracking-tight' style={{ fontSize: 16 }}>
                   {value}
-                </span>
+                </Span>
               </div>
               {/* The red cursor line from the image */}
               {/* <div className='absolute -right-3 h-[80%] w-[3px] bg-red-600 rounded-full' /> */}
@@ -107,7 +108,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
             {/* Action Button */}
             <MyButton
               className={cn(
-                'w-full py-0     min-h-0 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[6px] text-slate-300 font-semibold shadow-lg ',
+                'w-full py-1  h-auto   min-h-0 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[6px] text-slate-300 font-semibold shadow-lg ',
                 Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
               )}
               disabled={Bignumber(value || '0').lte(0) || loading}

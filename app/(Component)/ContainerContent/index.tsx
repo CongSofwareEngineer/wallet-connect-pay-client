@@ -7,10 +7,11 @@ function ContainerContent({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className='flex flex-col relative z-999  items-center bg-black p-4'
+      className='flex flex-col relative z-999  items-center bg-black '
       style={{
         width: width * 0.82,
         height: height * 0.66,
+        padding: width * 0.05,
       }}
     >
       {children}

@@ -21,6 +21,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const endpoint = body.endpoint
     const chainType = body.chainType
+    const url = req.url
+
+    console.log({ url })
 
     delete body.chainType
     delete body.endpoint
