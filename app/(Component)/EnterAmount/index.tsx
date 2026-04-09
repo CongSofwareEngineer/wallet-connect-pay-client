@@ -25,7 +25,7 @@ const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', 'back']
 
 const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const { translate } = useLanguage()
-  const { width, height } = useSizePoss()
+  const { width, heightContent } = useSizePoss()
   const [loading, setLoading] = useState(false)
 
   const handleKeyPress = (key: string) => {
@@ -108,16 +108,17 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
             {/* Action Button */}
             <MyButton
               className={cn(
-                'w-full py-1  h-auto   min-h-0 bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all rounded-[6px] text-slate-300 font-semibold shadow-lg ',
+                'w-full  bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all   shadow-lg ',
                 Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
               )}
               disabled={Bignumber(value || '0').lte(0) || loading}
               style={{
-                fontSize: width * 0.05,
+                paddingTop: heightContent * 0.01,
+                paddingBottom: heightContent * 0.01,
               }}
               onClick={handleSubmit}
             >
-              {loading ? translate('accounts.loading') : translate('walletConnectPay.enterAmount')}
+              <Span style={{ fontSize: 14 }}>{loading ? translate('accounts.loading') : translate('walletConnectPay.enterAmount')}</Span>
             </MyButton>
           </div>
         </div>
