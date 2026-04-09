@@ -29,8 +29,8 @@ const ClientRender = ({ children }: PropsWithChildren) => {
         <MyModal />
         <MyDrawer />
 
-        <ToastContainer position='top-right' style={{ marginTop: 10 }} />
-        <BackToTop />
+        {/* <ToastContainer position='top-right' style={{ marginTop: 10 }} /> */}
+        {/* <BackToTop /> */}
 
         <LoadingFirstLoad />
       </main>

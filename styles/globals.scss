@@ -19,7 +19,7 @@
 
 body {
   font-size: 16px;
-
+  font-family: var(--font-dm-sans);
   @media screen and (max-width: 768px) {
     font-size: 14px;
   }

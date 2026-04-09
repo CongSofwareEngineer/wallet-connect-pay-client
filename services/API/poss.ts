@@ -97,5 +97,16 @@ class PossServices {
 
     return res?.data?.data || res?.data
   }
+
+  static async getTransactions(params: any): Promise<any> {
+    const res = await fetchConfig({
+      ...config,
+      url: `/api/transactions`,
+      method: 'GET',
+      body: params,
+    })
+
+    return res?.data?.data || res?.data
+  }
 }
 export default PossServices

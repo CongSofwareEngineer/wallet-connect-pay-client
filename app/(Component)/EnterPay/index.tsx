@@ -47,7 +47,7 @@ type Props = {
 }
 
 const EnterPay = ({ onNewSale, onActivity }: Props) => {
-  const { width, heightContent } = useSizePoss()
+  const { width, heightContent, widthContent } = useSizePoss()
   const { translate } = useLanguage()
   const [selectedChain, setSelectedChain] = useState<ChainType>(PossUtils.chainType)
   const onChangeChain = (chain: ChainType) => {
@@ -59,13 +59,26 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
     <ContainerContent>
       <div className='flex flex-col   items-center justify-between w-full h-full'>
         <Div className='flex flex-col gap-4 w-full items-center'>
-          <h1 className='text-xl font-bold text-white'>{translate('walletConnectPay.posApp')}</h1>
+          <Div
+            className=' font-bold text-white'
+            style={{
+              paddingBottom: heightContent * 0.005,
+              fontSize: 18,
+            }}
+          >
+            {translate('walletConnectPay.posApp')}
+          </Div>
           {/* Title */}
 
           {/* Chain Selection */}
-          <div className='w-full flex flex-col gap-3 px-1  '>
+          <div className='w-full relative flex flex-col gap-3 px-1  '>
             <Div className=' font-medium text-slate-500   tracking-wider leading-none'>{translate('walletConnectPay.selectChain')}</Div>
-            <div className='flex items-center gap-4 overflow-x-auto pb-4 no-scrollbar scroll-smooth'>
+            <div
+              className='flex   items-center gap-4 overflow-x-auto no-scrollbar scroll-smooth'
+              style={{
+                paddingBottom: heightContent * 0.03,
+              }}
+            >
               {chains.map((chain) => (
                 <button
                   key={chain.chainType}
@@ -88,12 +101,19 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
                 </button>
               ))}
             </div>
+            <div
+              className='absolute bottom-0   right-0  border-b border-white/15   h-1'
+              style={{
+                width: widthContent,
+                left: -(width * 0.05),
+              }}
+            />
           </div>
         </Div>
 
         <div className='flex flex-col gap-2 w-full items-center'>
           {/* Divider & Brand */}
-          <div className='w-full flex flex-col items-center gap-4 border-t border-white/5 '>
+          <div className='w-full flex flex-col items-center gap-4'>
             <MyImage alt='WalletConnect' className='brightness-150 !w-[30%] !h-auto   grayscale-0 opacity-100' src={images.icons.walletConnect} />
           </div>
 
@@ -109,7 +129,7 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
               <div className=' group-hover:scale-110 transition-transform'>
                 <PlusSquare className='w-6 h-6 text-slate-400' strokeWidth={1.5} />
               </div>
-              <Div className='text-sm text-slate-300 font-medium tracking-wide'>{translate('walletConnectPay.newSale')}</Div>
+              <Div className=' tracking-wide'>{translate('walletConnectPay.newSale')}</Div>
             </button>
 
             <button
@@ -122,7 +142,7 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
               <div className=' group-hover:scale-110 transition-transform'>
                 <History className='w-6 h-6 text-slate-400' strokeWidth={1.5} />
               </div>
-              <Div className='text-sm text-slate-300 font-medium tracking-wide'>{translate('walletConnectPay.activity')}</Div>
+              <Div className=' tracking-wide'>{translate('walletConnectPay.activity')}</Div>
             </button>
           </div>
         </div>

@@ -45,6 +45,7 @@ const config = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         'noto-sans': ['var(--font-noto-sans)'],
         monomaniacOne: ['var(--font-monomaniac-one)'],
+        'dm-sans': ['var(--font-dm-sans)'],
       },
       fontSize: {
         title: {

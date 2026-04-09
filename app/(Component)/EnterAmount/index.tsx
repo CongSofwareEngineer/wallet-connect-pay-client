@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import Bignumber from 'bignumber.js'
+import Bignumber, { BigNumber } from 'bignumber.js'
 import { Delete, ChevronLeft } from 'lucide-react'
 
 import ContainerContent from '../ContainerContent'
@@ -63,6 +63,42 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
     onNext(res)
   }
 
+  const renderBtn = () => {
+    let text = translate('walletConnectPay.enterAmount')
+
+    try {
+      if (BigNumber(value).gt(0)) {
+        text = `Charge $${BigNumber(value).toFormat()}`
+      } else {
+        text = translate('walletConnectPay.enterAmount')
+      }
+    } catch {
+    } finally {
+      if (loading) {
+        text = translate('accounts.loading')
+      }
+    }
+
+    return (
+      <MyButton
+        className={cn(
+          'w-full  bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all   shadow-lg ',
+          Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
+        )}
+        disabled={Bignumber(value || '0').lte(0) || loading}
+        style={{
+          paddingTop: heightContent * 0.01,
+          paddingBottom: heightContent * 0.01,
+        }}
+        onClick={handleSubmit}
+      >
+        <Div className='max-w-full text-ellipsis overflow-hidden' style={{ fontSize: 14 }}>
+          {text}
+        </Div>
+      </MyButton>
+    )
+  }
+
   return (
     <ContainerContent>
       <div className='flex flex-col items-center justify-between w-full h-full overflow-hidden'>
@@ -106,20 +142,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
             </div>
 
             {/* Action Button */}
-            <MyButton
-              className={cn(
-                'w-full  bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all   shadow-lg ',
-                Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
-              )}
-              disabled={Bignumber(value || '0').lte(0) || loading}
-              style={{
-                paddingTop: heightContent * 0.01,
-                paddingBottom: heightContent * 0.01,
-              }}
-              onClick={handleSubmit}
-            >
-              <Span style={{ fontSize: 14 }}>{loading ? translate('accounts.loading') : translate('walletConnectPay.enterAmount')}</Span>
-            </MyButton>
+            {renderBtn()}
           </div>
         </div>
       </div>

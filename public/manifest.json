@@ -1,7 +1,7 @@
 {
-  "name": "TC Store",
-  "short_name": "tc_tore",
-  "description": "TC Store",
+  "name": "Wallet Connect Pay Client",
+  "short_name": "Wallet Connect Pay Client",
+  "description": "Wallet Connect Pay Client",
   "start_url": "/",
   "display": "fullscreen",
   "background_color": "#fff",
