@@ -2,7 +2,7 @@ import { toast, ToastOptions } from 'react-toastify'
 
 import { language } from '@/zustand/language'
 
-export const copyToClipboard = (text: any) => {
+export const copyToClipboard = (text: any, textCustom?: string) => {
   const tmp = document.createElement('input')
 
   tmp.value = text
@@ -10,7 +10,7 @@ export const copyToClipboard = (text: any) => {
   tmp.select()
   document.execCommand('copy')
   tmp.remove()
-  showNotificationSuccess(language.getState().language.messages.text.copied, {
+  showNotificationSuccess(textCustom || language.getState().language.messages.text.copied, {
     autoClose: 2000,
     style: {
       width: 'auto',

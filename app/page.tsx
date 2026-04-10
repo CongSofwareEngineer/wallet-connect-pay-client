@@ -20,7 +20,7 @@ const HomePage = () => {
   const [step, setStep] = useState<Step>('enter-pay')
   const { isBySizeWidth, isBySizeHeight } = useSizeScreen()
   const { reSize, heightContent, width } = useSizePoss()
-  const [value, setValue] = useState('0')
+  const [value, setValue] = useState('')
   const [infoPay, setInfoPay] = useState<InfoPay | null>(null)
   // const [infoPay, setInfoPay] = useState<InfoPay | null>({
   //   paymentId: 'pay_cda2ecc101KNR3ZFBQ5CQR24T6BKN4GP4G',
@@ -95,11 +95,11 @@ const HomePage = () => {
               amount={value}
               onBack={() => {
                 setStep('enter-pay')
-                setValue('0')
+                setValue('')
               }}
               onNewSale={() => {
                 setStep('enter-amount')
-                setValue('0')
+                setValue('')
               }}
             />
           )}

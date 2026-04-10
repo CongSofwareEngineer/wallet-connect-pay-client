@@ -73,7 +73,7 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
 
           {/* Chain Selection */}
           <div className='w-full relative flex flex-col gap-3 px-1  '>
-            <Div className=' font-medium text-slate-500   tracking-wider leading-none'>{translate('walletConnectPay.selectChain')}</Div>
+            <Div className=' text-slate-500   tracking-wider leading-none'>{translate('walletConnectPay.selectChain')}</Div>
             <div
               className='flex   items-center  overflow-x-auto no-scrollbar scroll-smooth'
               style={{
@@ -88,8 +88,8 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
                   className={`relative flex-shrink-0  rounded-full p-[1px] transition-all duration-200 active:scale-90 ${selectedChain === chain.chainType ? 'bg-blue-500' : 'bg-transparent hover:bg-white/5'
                     }`}
                   style={{
-                    width: widthContent * 0.1,
-                    height: widthContent * 0.1,
+                    width: widthContent * 0.105,
+                    height: widthContent * 0.105,
                   }}
                   onClick={() => onChangeChain(chain.chainType)}
                 >

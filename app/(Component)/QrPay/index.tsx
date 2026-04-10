@@ -76,7 +76,7 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
               size={heightContent * 0.35}
               style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
               value={infoPay.gatewayUrl}
-              onClick={() => copyToClipboard(infoPay.gatewayUrl)}
+              onClick={() => copyToClipboard(infoPay.gatewayUrl, translate('walletConnectPay.copyPaymentUrl'))}
               imageSettings={{
                 src: images.icons.iconWalletConnect,
                 x: undefined,

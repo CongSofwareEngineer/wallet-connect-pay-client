@@ -29,7 +29,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const [loading, setLoading] = useState(false)
   const isValidValue = useMemo(() => {
     try {
-      if (BigNumber(value).gte(0.01)) {
+      if (BigNumber(value || '0').gte(0.01)) {
         return true
       }
     } catch {
@@ -40,7 +40,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const handleKeyPress = (key: string) => {
     if (key === 'back') {
       if (value.length <= 1 || value === '0' || value === '0.0') {
-        setValue('0')
+        setValue('')
       } else {
         setValue(value.slice(0, value.length - 1))
       }
@@ -59,6 +59,13 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
       }
     } else {
       if (key === '.' && value.includes('.')) return
+
+      if (value.includes('.')) {
+        const decimalPart = value.split('.')[1]
+
+        if (decimalPart && decimalPart.length >= 2) return
+      }
+
       setValue(`${value}${key}`)
     }
   }
@@ -87,9 +94,9 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
       <MyButton
         className={cn(
           'w-full  bg-[#2563eb] hover:bg-blue-500 active:scale-98 transition-all   shadow-lg ',
-          Bignumber(value).gt(0) ? 'cursor-pointer' : 'cursor-not-allowed'
+          isValidValue ? 'cursor-pointer' : 'cursor-not-allowed'
         )}
-        disabled={Bignumber(value || '0').lte(0) || loading}
+        disabled={!isValidValue || loading}
         style={{
           height: heightContent * 0.08,
         }}
@@ -114,7 +121,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
                   $
                 </Span>
                 <Span className={cn('font-bold  tracking-tight', isValidValue ? '' : 'text-slate-400')} style={{ fontSize: 18 }}>
-                  {value}
+                  {value || '0.00'}
                 </Span>
               </div>
               {/* The red cursor line from the image */}

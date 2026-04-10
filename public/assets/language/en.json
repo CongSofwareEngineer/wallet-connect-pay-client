@@ -21,7 +21,7 @@
   },
   "text": {
     "content": "Content",
-    "copied":"Copied"
+    "copied": "Copied"
   },
   "placeholder": {
     "address": "Address",
@@ -323,6 +323,7 @@
       "failed": "Payment Failed",
       "expired": "Payment Expired",
       "cancelled": "Payment Cancelled"
-    }
+    },
+    "copyPaymentUrl": "Payment URL copied"
   }
 }
