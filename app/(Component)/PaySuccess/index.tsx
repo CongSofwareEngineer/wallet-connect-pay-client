@@ -29,7 +29,13 @@ const PaySuccess = ({ amount, onNewSale, onBack }: Props) => {
       <div className='flex h-full w-full flex-col items-center justify-between text-white'>
         <Header onBack={onBack} />
 
-        <div className='w-full flex items-center flex-1 justify-between flex-col gap-3  bg-[#36AD77] px-1 py-5 rounded-tl-2xl rounded-tr-2xl'>
+        <div
+          className='w-full h-full flex items-center flex-1 justify-between flex-col gap-3  bg-[#36AD77] px-1  rounded-tl-2xl rounded-tr-2xl'
+          style={{
+            paddingTop: heightContent * 0.05,
+            paddingBottom: heightContent * 0.05,
+          }}
+        >
           {/* Content Section */}
           <MyImage alt='WalletConnect' className='!h-auto !w-[80%]' quality={100} src={images.icons.walletConnectPay} />
 
@@ -59,6 +65,9 @@ const PaySuccess = ({ amount, onNewSale, onBack }: Props) => {
           <div className='w-full px-2'>
             <MyButton
               className=' w-full  bg-white p-0  text-lg text-[#1a1c1e] hover:bg-white/95 active:scale-[0.98] transition-all border-none shadow-md'
+              style={{
+                height: heightContent * 0.08,
+              }}
               onClick={onNewSale}
             >
               <Span className='font-bold'>{translate('walletConnectPay.newSale')}</Span>

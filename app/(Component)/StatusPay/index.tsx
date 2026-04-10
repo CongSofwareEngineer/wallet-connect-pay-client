@@ -12,8 +12,6 @@ function StatusPay({ infoPay, onSuccess }: { infoPay: InfoPay; onSuccess?: () =>
 
   useEffect(() => {
     if (infoPay.paymentId) {
-      console.log('start trackingPayment ')
-
       PossServices.trackingPayment(infoPay.paymentId, (status) => {
         if (status) {
           setStatus(status)

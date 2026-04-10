@@ -3,15 +3,15 @@ import React from 'react'
 import useSizePoss from '@/hooks/useSizePoss'
 
 function ContainerContent({ children }: { children: React.ReactNode }) {
-  const { width, height } = useSizePoss()
+  const { widthContent } = useSizePoss()
 
   return (
     <div
-      className='flex flex-col relative z-999  items-center bg-black '
+      className='flex overflow-hidden flex-col relative z-999  items-center bg-black '
       style={{
-        width: width * 0.82,
-        height: height * 0.66,
-        padding: width * 0.05,
+        width: '100%',
+        height: '100%',
+        padding: widthContent * 0.05,
       }}
     >
       {children}

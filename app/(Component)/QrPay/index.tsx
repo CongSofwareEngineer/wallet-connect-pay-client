@@ -26,7 +26,7 @@ type Props = {
 
 const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
   const { translate } = useLanguage()
-  const { width } = useSizePoss()
+  const { heightContent, widthContent } = useSizePoss()
   const { formattedTime } = useCountdown(900) // 15 minutes
 
   const handleCancel = async () => {
@@ -46,7 +46,15 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
       <div className='flex flex-col items-center justify-between w-full h-full relative '>
         <Header onBack={() => handleBack()} />
         {/* Content Card */}
-        <div className='flex bg-[#1e293b]/50 rounded-tl-2xl rounded-tr-2xl p-4 flex-col items-center   w-full flex-1 justify-center'>
+        <div
+          className='flex bg-[#1e293b]/50 rounded-tl-2xl rounded-tr-2xl  flex-col items-center   w-full flex-1 justify-center'
+          style={{
+            paddingLeft: widthContent * 0.1,
+            paddingRight: widthContent * 0.1,
+            paddingBottom: heightContent * 0.05,
+            paddingTop: heightContent * 0.05,
+          }}
+        >
           <Div className='text-slate-400  font-medium'>{translate('walletConnectPay.scanToPay')}</Div>
           <div className='flex items-baseline mb-4'>
             <Span className='font-bold text-white mr-1' style={{ fontSize: 16 }}>
@@ -63,7 +71,7 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
               bgColor={"#ffffff"}
               fgColor={"#000000"}
               level={"H"}
-              size={width * 0.5}
+              size={heightContent * 0.35}
               style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
               value={infoPay.gatewayUrl}
               imageSettings={{
@@ -78,25 +86,25 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
             />
           </div>
 
-          <div className='flex flex-col items-center gap-1 mt-6'>
+          <Div className='flex flex-col items-center gap-1 ' style={{ marginTop: heightContent * 0.02 }}>
             <Span className='text-slate-400  '>
               {translate('walletConnectPay.paymentExpiresIn')} <Span className='text-blue-500 font-bold'>{formattedTime}</Span>
             </Span>
-          </div>
+          </Div>
           {/* Bottom Close Button */}
-          <div className='pb-1 w-full flex flex-1 justify-center items-end'>
+          <div className=' w-full flex flex-1 justify-center items-end'>
             <button
               className=' flex items-center justify-center bg-[#1e293b]/80 hover:bg-[#334155]/80 active:scale-90 transition-all rounded-full cursor-pointer border border-slate-700/50 shadow-xl'
               style={{
-                padding: width * 0.03,
+                padding: heightContent * 0.02,
               }}
               onClick={handleCancel}
             >
               <X
                 className='  text-slate-400'
                 style={{
-                  width: width * 0.05,
-                  height: width * 0.05,
+                  width: heightContent * 0.033,
+                  height: heightContent * 0.033,
                 }}
               />
             </button>

@@ -25,8 +25,10 @@ const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', 'back']
 
 const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const { translate } = useLanguage()
-  const { width, heightContent } = useSizePoss()
+  const { heightContent } = useSizePoss()
   const [loading, setLoading] = useState(false)
+
+  console.log({ heightContent })
 
   const handleKeyPress = (key: string) => {
     if (key === 'back') {
@@ -87,14 +89,11 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
         )}
         disabled={Bignumber(value || '0').lte(0) || loading}
         style={{
-          paddingTop: heightContent * 0.01,
-          paddingBottom: heightContent * 0.01,
+          height: heightContent * 0.08,
         }}
         onClick={handleSubmit}
       >
-        <Div className='max-w-full text-ellipsis overflow-hidden' style={{ fontSize: 14 }}>
-          {text}
-        </Div>
+        <Div className='max-w-full text-ellipsis overflow-hidden'>{text}</Div>
       </MyButton>
     )
   }
@@ -106,9 +105,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
         <div className='flex bg-[#1e293b]/50 rounded-tl-2xl rounded-tr-2xl p-4 flex-col items-center   w-full flex-1 justify-center'>
           {/* Center: Amount and Text */}
           <Div className='flex gap-2 flex-col items-center justify-center flex-1 w-full  '>
-            <p className='  font-light' style={{ fontSize: width * 0.05 }}>
-              {translate('walletConnectPay.enterAmountToCharge')}
-            </p>
+            <Div className='  font-light'>{translate('walletConnectPay.enterAmountToCharge')}</Div>
             <div className='relative flex items-center justify-center'>
               <div className='flex items-baseline'>
                 <Span className='font-bold text-slate-400 mb-2 mr-1' style={{ fontSize: 16 }}>
@@ -124,22 +121,22 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
           </Div>
 
           {/* Bottom: Pad and Button */}
-          <div className='w-full mt-auto space-y-4'>
+          <div className='w-full mt-auto  '>
             {/* Keypad */}
-            <div className='grid grid-cols-3 gap-2 w-full'>
+            <Div className='grid grid-cols-3 gap-4 w-full' style={{ paddingBottom: heightContent * 0.02 }}>
               {keys.map((key) => (
                 <button
                   key={key}
                   className='flex items-center justify-center  bg-[#1f2937] hover:bg-[#374151] active:scale-95 transition-all rounded-[6px]  font-medium shadow-md cursor-pointer'
                   style={{
-                    height: width * 0.1,
+                    height: heightContent * 0.08,
                   }}
                   onClick={() => handleKeyPress(key)}
                 >
-                  {key === 'back' ? <Delete className='w-4 h-4 text-slate-300' /> : <span style={{ fontSize: width * 0.06 }}>{key}</span>}
+                  {key === 'back' ? <Delete style={{ height: heightContent * 0.06 }} /> : <Div style={{ fontSize: 16 }}>{key}</Div>}
                 </button>
               ))}
-            </div>
+            </Div>
 
             {/* Action Button */}
             {renderBtn()}

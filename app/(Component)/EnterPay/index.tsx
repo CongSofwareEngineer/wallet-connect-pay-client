@@ -57,12 +57,13 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
 
   return (
     <ContainerContent>
-      <div className='flex flex-col   items-center justify-between w-full h-full'>
-        <Div className='flex flex-col gap-4 w-full items-center'>
+      <div className='flex flex-col   items-center w-full h-full'>
+        <Div className='flex flex-col  w-full items-center'>
           <Div
             className=' font-bold text-white'
             style={{
-              paddingBottom: heightContent * 0.005,
+              paddingBottom: heightContent * 0.018,
+              paddingTop: heightContent * 0.011,
               fontSize: 18,
             }}
           >
@@ -76,8 +77,9 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
             <div
               className='flex   items-center  overflow-x-auto no-scrollbar scroll-smooth'
               style={{
-                paddingBottom: heightContent * 0.03,
-                gap: widthContent * 0.04,
+                paddingBottom: heightContent * 0.035,
+                paddingTop: heightContent * 0.005,
+                gap: widthContent * 0.08,
               }}
             >
               {chains.map((chain) => (
@@ -86,13 +88,13 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
                   className={`relative flex-shrink-0  rounded-full p-[1px] transition-all duration-200 active:scale-90 ${selectedChain === chain.chainType ? 'bg-blue-500' : 'bg-transparent hover:bg-white/5'
                     }`}
                   style={{
-                    width: widthContent * 0.13,
-                    height: widthContent * 0.13,
+                    width: widthContent * 0.1,
+                    height: widthContent * 0.1,
                   }}
                   onClick={() => onChangeChain(chain.chainType)}
                 >
                   <div className='w-full h-full rounded-full   bg-slate-900 border border-slate-700/50 shadow-inner'>
-                    <Image alt={chain.name} height={widthContent * 0.12} src={chain.icon} width={widthContent * 0.12} />
+                    <Image alt={chain.name} height={widthContent * 0.12} src={chain.icon} width={heightContent * 0.12} />
                   </div>
                   {selectedChain === chain.chainType && (
                     <div
@@ -118,35 +120,51 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
             <div
               className='absolute bottom-0   right-0  border-b border-white/15   h-1'
               style={{
-                width: widthContent,
-                left: -(width * 0.05),
+                width: widthContent + width * 0.046,
+                left: -(width * 0.046),
               }}
             />
           </div>
         </Div>
 
-        <div className='flex flex-col gap-2 w-full items-center'>
+        <div
+          className='w-full flex flex-col items-center '
+          style={{
+            paddingTop: heightContent * 0.07,
+            paddingBottom: heightContent * 0.05,
+          }}
+        >
+          <MyImage alt='WalletConnect' className='brightness-150 !w-[25%] !h-auto   grayscale-0 opacity-100' src={images.icons.walletConnect} />
+        </div>
+
+        <div className='flex flex-col gap-2 w-full items-center '>
           {/* Divider & Brand */}
-          <div className='w-full flex flex-col items-center gap-4'>
-            <MyImage alt='WalletConnect' className='brightness-150 !w-[30%] !h-auto   grayscale-0 opacity-100' src={images.icons.walletConnect} />
-          </div>
 
           {/* Action Cards */}
-          <div className='flex flex-col flex-1 gap-6 w-full pt-2'>
+          <div
+            className='flex flex-col gap-6 w-full pt-2'
+            style={{
+              height: heightContent * 0.25,
+            }}
+          >
             <button
-              className='w-full flex-1 py-2 flex cursor-pointer bg-[#1e293b]/50 hover:bg-[#334155]/60 transition-all duration-300 rounded-[12px] flex-col items-center justify-center gap-1 shadow-xl border border-white/5 group active:scale-[0.97]'
-              style={{
-                minHeight: heightContent * 0.2,
-              }}
+              className='w-full flex-1 py-2 flex cursor-pointer bg-[#2d3339] hover:bg-[#334155]/60 transition-all duration-300 rounded-[12px] flex-col items-center justify-center gap-1 shadow-xl border border-[#3A424D] group active:scale-[0.97]'
               onClick={onNewSale}
             >
               <div className=' group-hover:scale-110 transition-transform'>
-                <PlusSquare className='w-6 h-6 text-slate-400' strokeWidth={1.5} />
+                <PlusSquare
+                  className='  text-slate-400'
+                  strokeWidth={1.5}
+                  style={{
+                    width: heightContent * 0.06,
+                    height: heightContent * 0.06,
+                  }}
+                />
               </div>
               <Div className=' tracking-wide'>{translate('walletConnectPay.newSale')}</Div>
             </button>
 
-            <button
+            {/* <button
               className='w-full flex-1 py-2 flex cursor-pointer bg-[#1e293b]/50 hover:bg-[#334155]/60 transition-all duration-300 rounded-[12px] flex-col items-center justify-center gap-1 shadow-xl border border-white/5 group active:scale-[0.97]'
               style={{
                 minHeight: heightContent * 0.2,
@@ -157,7 +175,7 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
                 <History className='w-6 h-6 text-slate-400' strokeWidth={1.5} />
               </div>
               <Div className=' tracking-wide'>{translate('walletConnectPay.activity')}</Div>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

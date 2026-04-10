@@ -19,7 +19,7 @@ const HomePage = () => {
   const { isMobile } = useMedia()
   const [step, setStep] = useState<Step>('enter-pay')
   const { isBySizeWidth, isBySizeHeight } = useSizeScreen()
-  const { reSize, height, width } = useSizePoss()
+  const { reSize, heightContent, width } = useSizePoss()
   const [value, setValue] = useState('0')
   const [infoPay, setInfoPay] = useState<InfoPay | null>(null)
   // const [infoPay, setInfoPay] = useState<InfoPay | null>({
@@ -45,9 +45,9 @@ const HomePage = () => {
           className={cn(
             'poss-case',
             isMobile && ' !z-99 object-contain !w-screen !h-auto',
-            !isMobile && ' !z-99 object-contain !max-w-[100dvw]  !max-h-[100dvh] ',
-            isBySizeWidth && !isMobile && '  !w-[calc(100dvh-10px)] !h-auto',
-            isBySizeHeight && !isMobile && 'md:!w-auto !w-full  !h-[calc(100dvh-20px)]'
+            !isMobile && ' !z-99 object-contain !max-w-[100dvw]  !max-h-[calc(100dvh-20px)] '
+            // isBySizeWidth && !isMobile && '  !w-[calc(100dvh-10px)] !h-auto',
+            // isBySizeHeight && !isMobile && 'md:!w-auto !w-full  !h-[calc(100dvh-20px)]'
           )}
           src={images.home.possCase}
           style={{
@@ -61,12 +61,12 @@ const HomePage = () => {
         />
 
         <div
-          className='absolute bg-black    z-999 flex justify-end items-end '
+          className='absolute bg-black   z-999 flex justify-end items-end '
           style={{
             width: width * 0.82,
-            height: height * 0.63,
+            height: heightContent,
             left: width * 0.08935,
-            bottom: height * 0.05932203389,
+            bottom: heightContent * 0.08,
           }}
         >
           {step === 'enter-pay' && <EnterPay onActivity={() => setStep('history')} onNewSale={() => setStep('enter-amount')} />}

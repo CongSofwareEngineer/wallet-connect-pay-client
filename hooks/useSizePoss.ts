@@ -40,7 +40,7 @@ const useSizePoss = () => {
   return {
     size: sizeScreen,
     widthContent: sizeScreen.width * 0.82,
-    heightContent: sizeScreen.height * 0.66,
+    heightContent: sizeScreen.height * 0.62,
     reSize,
     width: sizeScreen.width,
     height: sizeScreen.height,

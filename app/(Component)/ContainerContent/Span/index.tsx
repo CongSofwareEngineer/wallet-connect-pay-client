@@ -3,24 +3,24 @@ import React, { HtmlHTMLAttributes } from 'react'
 import useSizePoss from '@/hooks/useSizePoss'
 
 const Span = ({ children, className, style, ...props }: HtmlHTMLAttributes<HTMLSpanElement>) => {
-  const { width, height } = useSizePoss()
+  const { heightContent } = useSizePoss()
 
   const getSize = () => {
     const size = style?.fontSize || 14
 
     switch (size) {
       case 12:
-        return width * 0.1
+        return heightContent * 0.02
       case 14:
-        return width * 0.05
+        return heightContent * 0.03
       case 16:
-        return width * 0.07
+        return heightContent * 0.04
       case 18:
-        return width * 0.08
+        return heightContent * 0.06
       case 20:
-        return width * 0.09
+        return heightContent * 0.07
       case 22:
-        return width * 0.1
+        return heightContent * 0.08
       default:
         size
     }
@@ -40,12 +40,14 @@ const Span = ({ children, className, style, ...props }: HtmlHTMLAttributes<HTMLS
     }
 
     switch (size) {
+      case 2:
+        return heightContent * 0.01
       case 4:
-        return height * 0.01
+        return heightContent * 0.015
       case 14:
-        return width * 0.05
+        return heightContent * 0.05
       case 16:
-        return width * 0.05
+        return heightContent * 0.05
       default:
         size
     }
