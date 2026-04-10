@@ -69,7 +69,15 @@ const HomePage = () => {
             bottom: heightContent * 0.08,
           }}
         >
-          {step === 'enter-pay' && <EnterPay onActivity={() => setStep('history')} onNewSale={() => setStep('enter-amount')} />}
+          {step === 'enter-pay' && (
+            <EnterPay
+              onActivity={() => setStep('history')}
+              onNewSale={() => {
+                setStep('enter-amount')
+                setValue('')
+              }}
+            />
+          )}
           {step === 'enter-amount' && (
             <EnterAmount
               setValue={setValue}

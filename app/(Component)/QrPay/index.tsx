@@ -30,12 +30,6 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
   const { heightContent, widthContent } = useSizePoss()
   const { formattedTime } = useCountdown(900) // 15 minutes
 
-  const handleCancel = async () => {
-    PossServices.isStopTracking = true
-    PossServices.cancelPayment(infoPay.paymentId)
-    onClose()
-  }
-
   const handleBack = async () => {
     PossServices.isStopTracking = true
     PossServices.cancelPayment(infoPay.paymentId)
@@ -101,7 +95,7 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
               style={{
                 padding: heightContent * 0.02,
               }}
-              onClick={handleCancel}
+              onClick={handleBack}
             >
               <X
                 className='  text-slate-400'
