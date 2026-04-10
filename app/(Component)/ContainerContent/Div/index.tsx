@@ -5,12 +5,14 @@ import useSizePoss from '@/hooks/useSizePoss'
 const Div = ({ children, className, style, ...props }: HtmlHTMLAttributes<HTMLDivElement>) => {
   const { heightContent } = useSizePoss()
 
-  const getSize = () => {
+  const getFontSize = () => {
     const size = style?.fontSize || 14
 
     switch (size) {
       case 12:
         return heightContent * 0.02
+      case 13:
+        return heightContent * 0.027
       case 14:
         return heightContent * 0.03
       case 16:
@@ -56,7 +58,7 @@ const Div = ({ children, className, style, ...props }: HtmlHTMLAttributes<HTMLDi
   const getStyle = () => {
     const styleConfig: any = {
       ...style,
-      fontSize: getSize(),
+      fontSize: getFontSize(),
       gap: getGap(),
     }
 

@@ -73,7 +73,9 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
 
           {/* Chain Selection */}
           <div className='w-full relative flex flex-col gap-3 px-1  '>
-            <Div className=' text-slate-500   tracking-wider leading-none'>{translate('walletConnectPay.selectChain')}</Div>
+            <Div className=' text-slate-500   tracking-wider leading-none' style={{ fontSize: 13 }}>
+              {translate('walletConnectPay.selectChain')}
+            </Div>
             <div
               className='flex   items-center  overflow-x-auto no-scrollbar scroll-smooth'
               style={{
