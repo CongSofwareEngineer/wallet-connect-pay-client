@@ -22,7 +22,7 @@ function StatusPay({ infoPay, onSuccess }: { infoPay: InfoPay; onSuccess?: () =>
       })
     }
   }, [])
-  // console.log({ status })
+  console.log({ status })
 
   if (status === 'requires_action' || !status) return null
 

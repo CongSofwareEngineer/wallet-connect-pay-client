@@ -16,11 +16,11 @@ const Span = ({ children, className, style, ...props }: HtmlHTMLAttributes<HTMLS
       case 16:
         return heightContent * 0.04
       case 18:
-        return heightContent * 0.06
+        return heightContent * 0.05
       case 20:
-        return heightContent * 0.07
+        return heightContent * 0.06
       case 22:
-        return heightContent * 0.08
+        return heightContent * 0.07
       default:
         size
     }

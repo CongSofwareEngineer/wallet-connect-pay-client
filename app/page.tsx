@@ -90,7 +90,19 @@ const HomePage = () => {
               onSuccess={() => setStep('success')}
             />
           )}
-          {step === 'success' && <PaySuccess amount={value} onBack={() => setStep('enter-pay')} onNewSale={() => setStep('enter-amount')} />}
+          {step === 'success' && (
+            <PaySuccess
+              amount={value}
+              onBack={() => {
+                setStep('enter-pay')
+                setValue('0')
+              }}
+              onNewSale={() => {
+                setStep('enter-amount')
+                setValue('0')
+              }}
+            />
+          )}
         </div>
       </div>
     </section>

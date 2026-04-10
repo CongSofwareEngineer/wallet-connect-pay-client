@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Bignumber, { BigNumber } from 'bignumber.js'
 import { Delete, ChevronLeft } from 'lucide-react'
 
@@ -27,8 +27,15 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const { translate } = useLanguage()
   const { heightContent } = useSizePoss()
   const [loading, setLoading] = useState(false)
-
-  console.log({ heightContent })
+  const isValidValue = useMemo(() => {
+    try {
+      if (BigNumber(value).gt(0)) {
+        return true
+      }
+    } catch {
+      return false
+    }
+  }, [value])
 
   const handleKeyPress = (key: string) => {
     if (key === 'back') {
@@ -68,14 +75,9 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const renderBtn = () => {
     let text = translate('walletConnectPay.enterAmount')
 
-    try {
-      if (BigNumber(value).gt(0)) {
-        text = `Charge $${BigNumber(value).toFormat()}`
-      } else {
-        text = translate('walletConnectPay.enterAmount')
-      }
-    } catch {
-    } finally {
+    if (isValidValue) {
+      text = `Charge $${BigNumber(value).toFormat()}`
+    } else {
       if (loading) {
         text = translate('accounts.loading')
       }
@@ -108,10 +110,10 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
             <Div className='  font-light'>{translate('walletConnectPay.enterAmountToCharge')}</Div>
             <div className='relative flex items-center justify-center'>
               <div className='flex items-baseline'>
-                <Span className='font-bold text-slate-400 mb-2 mr-1' style={{ fontSize: 16 }}>
+                <Span className={cn('font-bold  mb-2 mr-1', isValidValue ? '' : 'text-slate-400')} style={{ fontSize: 18 }}>
                   $
                 </Span>
-                <Span className='font-bold text-slate-400 tracking-tight' style={{ fontSize: 16 }}>
+                <Span className={cn('font-bold  tracking-tight', isValidValue ? '' : 'text-slate-400')} style={{ fontSize: 18 }}>
                   {value}
                 </Span>
               </div>
