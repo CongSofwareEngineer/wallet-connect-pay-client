@@ -15,6 +15,7 @@ import useCountdown from '@/hooks/useCountdown'
 import useSizePoss from '@/hooks/useSizePoss'
 import useLanguage from '@/hooks/useLanguage'
 import PossServices, { InfoPay } from '@/services/API/poss'
+import { copyToClipboard } from '@/utils/notification'
 
 type Props = {
   amount: string
@@ -68,12 +69,14 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
           <div className='relative bg-white p-2 rounded-[6px] shadow-[0_20px_50px_rgba(0,0,0,0.5)]  '>
             <StatusPay infoPay={infoPay} onSuccess={onSuccess} />
             <QRCodeCanvas
-              bgColor={"#ffffff"}
-              fgColor={"#000000"}
-              level={"H"}
+              bgColor={'#ffffff'}
+              className='cursor-pointer'
+              fgColor={'#000000'}
+              level={'H'}
               size={heightContent * 0.35}
               style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
               value={infoPay.gatewayUrl}
+              onClick={() => copyToClipboard(infoPay.gatewayUrl)}
               imageSettings={{
                 src: images.icons.iconWalletConnect,
                 x: undefined,

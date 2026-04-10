@@ -29,7 +29,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const [loading, setLoading] = useState(false)
   const isValidValue = useMemo(() => {
     try {
-      if (BigNumber(value).gt(0)) {
+      if (BigNumber(value).gte(0.01)) {
         return true
       }
     } catch {
@@ -124,6 +124,9 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
 
           {/* Bottom: Pad and Button */}
           <div className='w-full mt-auto  '>
+            <Div className='text-slate-400 text-center' style={{ paddingBottom: heightContent * 0.01, fontSize: 14 }}>
+              Minimum amount: $0.01
+            </Div>
             {/* Keypad */}
             <Div className='grid grid-cols-3 gap-4 w-full' style={{ paddingBottom: heightContent * 0.02 }}>
               {keys.map((key) => (
