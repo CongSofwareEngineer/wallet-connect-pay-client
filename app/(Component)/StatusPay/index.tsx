@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { CheckCircle2, XCircle, Timer, AlertCircle } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner } from '@heroui/spinner'
 
 import PossServices, { InfoPay, InfoTrackingPayment } from '@/services/API/poss'
@@ -78,4 +77,4 @@ function StatusPay({ infoPay, onSuccess }: { infoPay: InfoPay; onSuccess?: () =>
   )
 }
 
-export default StatusPay
+export default memo(StatusPay)

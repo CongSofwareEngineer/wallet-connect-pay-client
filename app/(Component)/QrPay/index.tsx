@@ -2,16 +2,16 @@
 
 import React from 'react'
 import { QRCodeCanvas } from 'qrcode.react'
-import { ChevronLeft, X } from 'lucide-react'
+import { X } from 'lucide-react'
 
 import ContainerContent from '../ContainerContent'
 import StatusPay from '../StatusPay'
 import Header from '../ContainerContent/Header'
 import Div from '../ContainerContent/Div'
 import Span from '../ContainerContent/Span'
+import CountdownTime from '../CountdownTime'
 
 import { images } from '@/config/images'
-import useCountdown from '@/hooks/useCountdown'
 import useSizePoss from '@/hooks/useSizePoss'
 import useLanguage from '@/hooks/useLanguage'
 import PossServices, { InfoPay } from '@/services/API/poss'
@@ -28,7 +28,6 @@ type Props = {
 const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
   const { translate } = useLanguage()
   const { heightContent, widthContent } = useSizePoss()
-  const { formattedTime } = useCountdown(900) // 15 minutes
 
   const handleBack = async () => {
     PossServices.isStopTracking = true
@@ -83,11 +82,7 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
             />
           </div>
 
-          <Div className='flex flex-col items-center gap-1 ' style={{ marginTop: heightContent * 0.02 }}>
-            <Span className='text-slate-400  '>
-              {translate('walletConnectPay.paymentExpiresIn')} <Span className='text-blue-500 font-bold'>{formattedTime}</Span>
-            </Span>
-          </Div>
+          <CountdownTime />
           {/* Bottom Close Button */}
           <div className=' w-full flex flex-1 justify-center items-end'>
             <button

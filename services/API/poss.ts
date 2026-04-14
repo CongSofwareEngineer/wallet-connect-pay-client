@@ -81,6 +81,8 @@ class PossServices {
     }
 
     callback(status)
+
+    return
   }
 
   static async cancelPayment(paymentId: string): Promise<InfoPay> {
