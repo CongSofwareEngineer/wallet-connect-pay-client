@@ -55,34 +55,36 @@ class PossServices {
   }
 
   static async trackingPayment(paymentId: string, callback: (status: InfoTrackingPayment) => void): Promise<void> {
-    if (PossServices.isStopTracking) {
-      return
-    }
+    let isContinue = true
+    let status: InfoTrackingPayment = 'requires_action'
 
-    const res = await fetchConfig({
-      ...config,
-      url: `/api/poss`,
-      method: 'POST',
-      body: {
-        paymentId,
-        endpoint: `payment-status`,
-        chainType: PossUtils.chainType,
-      },
-    })
+    while (isContinue) {
+      const res = await fetchConfig({
+        ...config,
+        url: `/api/poss`,
+        method: 'POST',
+        body: {
+          paymentId,
+          endpoint: `payment-status`,
+          chainType: PossUtils.chainType,
+        },
+      })
 
-    const status = res?.data?.data?.status || res?.data?.status
-
-    console.log({ trackingPayment: status })
-
-    if (status === 'processing' || status === 'requires_action') {
-      await sleep(2000)
+      status = res?.data?.data?.status || res?.data?.status
       callback(status)
-      await this.trackingPayment(paymentId, callback)
+
+      if (PossServices.isStopTracking) {
+        isContinue = false
+
+        break
+      }
+
+      if (status === 'processing' || status === 'requires_action') {
+        await sleep(2000)
+      } else {
+        isContinue = false
+      }
     }
-
-    callback(status)
-
-    return
   }
 
   static async cancelPayment(paymentId: string): Promise<InfoPay> {
