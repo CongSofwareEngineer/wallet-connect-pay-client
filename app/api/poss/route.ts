@@ -24,6 +24,8 @@ export async function POST(req: NextRequest) {
     const endpoint = body.endpoint
     const chainType = body.chainType
     const currency = body.currency as TYPE_CURRENCY
+    const amount = body.amount
+    const value = body.value
 
     delete body.chainType
     delete body.endpoint
@@ -37,6 +39,7 @@ export async function POST(req: NextRequest) {
       baseURL,
       headers: {
         origin: 'https://pos-demo.walletconnect.com',
+        referer: `https://pos-demo.walletconnect.com/scan?amount=${value}`,
         'x-api-key': apiKey,
         'x-merchant-id': PossUtils.getMerchantIdByChain(chainType),
       },
@@ -51,7 +54,7 @@ export async function POST(req: NextRequest) {
         request.body = {
           referenceId: body.referenceId,
           amount: {
-            value: body.value,
+            value: amount,
             unit,
           },
         }

@@ -38,10 +38,11 @@ class PossServices {
       method: 'POST',
       body: {
         referenceId,
-        value: amount.toString(),
+        value,
         endpoint: 'payment',
         chainType: PossUtils.chainType,
         currency,
+        amount: amount.toString(),
       },
     })
 
