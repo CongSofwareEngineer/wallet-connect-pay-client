@@ -2,6 +2,8 @@ export const images = {
   favicon: '/favicon.ico',
   logo: '/logo512.png',
   icons: {
+    usd: '/assets/images/icons/usd.png',
+    ero: '/assets/images/icons/ero.png',
     iconWalletConnect: '/assets/images/icons/iconWalletConnect.png',
     walletConnect: '/assets/images/icons/walletConnect.png',
     walletConnectLogo: '/assets/images/icons/walletConnectLogo.png',

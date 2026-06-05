@@ -1,5 +1,6 @@
 import { BigNumber } from 'bignumber.js'
 
+import { TYPE_CURRENCY } from '@/app/page'
 import fetchConfig from '@/config/fetchConfig'
 import { sleep } from '@/utils/functions'
 import PossUtils from '@/utils/poss'
@@ -22,7 +23,7 @@ if (process.env.NEXT_PUBLIC_ENV === 'development') {
 
 class PossServices {
   static isStopTracking = false
-  static async createPayment(value: string): Promise<InfoPay> {
+  static async createPayment(value: string, currency: TYPE_CURRENCY): Promise<InfoPay> {
     const amount = BigNumber(value).multipliedBy(100).toNumber()
     const characters = 'b240df9bcbc54f4b8fdd14902b63ac8c'
     let referenceId = ''
@@ -40,6 +41,7 @@ class PossServices {
         value: amount.toString(),
         endpoint: 'payment',
         chainType: PossUtils.chainType,
+        currency,
       },
     })
 

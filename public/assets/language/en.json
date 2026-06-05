@@ -324,6 +324,7 @@
       "expired": "Payment Expired",
       "cancelled": "Payment Cancelled"
     },
-    "copyPaymentUrl": "Payment URL copied"
+    "copyPaymentUrl": "Payment URL copied",
+    "selectCurrency": "Select currency"
   }
 }

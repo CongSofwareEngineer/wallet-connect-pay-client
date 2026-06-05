@@ -12,6 +12,7 @@ import { images } from '@/config/images'
 import useSizePoss from '@/hooks/useSizePoss'
 import PossUtils, { ChainType } from '@/utils/poss'
 import MyImage from '@/components/MyImage'
+import { TYPE_CURRENCY } from '@/app/page'
 
 const chains = [
   {
@@ -41,12 +42,25 @@ const chains = [
   },
 ]
 
+const CURRENCY_LIST = [
+  {
+    name: 'USD' as TYPE_CURRENCY,
+    icon: images.icons.usd,
+  },
+  {
+    name: 'ERO' as TYPE_CURRENCY,
+    icon: images.icons.ero,
+  },
+]
+
 type Props = {
   onNewSale: () => void
   onActivity: () => void
+  currency: TYPE_CURRENCY
+  setCurrency: (currency: TYPE_CURRENCY) => void
 }
 
-const EnterPay = ({ onNewSale, onActivity }: Props) => {
+const EnterPay = ({ onNewSale, currency, setCurrency }: Props) => {
   const { width, heightContent, widthContent } = useSizePoss()
   const { translate } = useLanguage()
   const [selectedChain, setSelectedChain] = useState<ChainType>(PossUtils.chainType)
@@ -69,7 +83,6 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
           >
             {translate('walletConnectPay.posApp')}
           </Div>
-          {/* Title */}
 
           {/* Chain Selection */}
           <div className='w-full relative flex flex-col gap-3 px-1  '>
@@ -95,10 +108,66 @@ const EnterPay = ({ onNewSale, onActivity }: Props) => {
                   }}
                   onClick={() => onChangeChain(chain.chainType)}
                 >
-                  <div className='w-full h-full rounded-full   bg-slate-900 border border-slate-700/50 shadow-inner'>
+                  <div className='w-full h-full rounded-full overflow-hidden   bg-slate-900 border border-slate-700/50 shadow-inner'>
                     <Image alt={chain.name} height={widthContent * 0.12} src={chain.icon} width={heightContent * 0.12} />
                   </div>
                   {selectedChain === chain.chainType && (
+                    <div
+                      className='absolute   bg-blue-500 rounded-full p-[2px] border-[#111827] shadow-sm'
+                      style={{
+                        top: 0,
+                        right: -widthContent * 0.01,
+                      }}
+                    >
+                      <Check
+                        className='  text-white'
+                        strokeWidth={4}
+                        style={{
+                          width: widthContent * 0.04,
+                          height: widthContent * 0.04,
+                        }}
+                      />
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+            <div
+              className='absolute bottom-0   right-0  border-b border-white/15   h-1'
+              style={{
+                width: widthContent + width * 0.046,
+                left: -(width * 0.046),
+              }}
+            />
+          </div>
+
+          <div className='w-full relative flex flex-col gap-3 px-1  '>
+            <Div className=' text-slate-500   tracking-wider leading-none' style={{ fontSize: 13, paddingTop: heightContent * 0.03 }}>
+              {translate('walletConnectPay.selectCurrency')}
+            </Div>
+            <div
+              className='flex   items-center  overflow-x-auto no-scrollbar scroll-smooth'
+              style={{
+                paddingBottom: heightContent * 0.035,
+                paddingTop: heightContent * 0.005,
+                gap: widthContent * 0.08,
+              }}
+            >
+              {CURRENCY_LIST.map((token) => (
+                <button
+                  key={token.name}
+                  className={`relative flex-shrink-0  rounded-full p-[1px] transition-all duration-200 active:scale-90 ${currency === token.name ? 'bg-blue-500' : 'bg-transparent opacity-50 hover:bg-white/5'
+                    }`}
+                  style={{
+                    width: widthContent * 0.105,
+                    height: widthContent * 0.105,
+                  }}
+                  onClick={() => setCurrency(token.name)}
+                >
+                  <div className='w-full h-full rounded-full overflow-hidden   bg-slate-900 border border-slate-700/50 shadow-inner'>
+                    <Image alt={token.name} height={widthContent * 0.12} src={token.icon} width={heightContent * 0.12} />
+                  </div>
+                  {currency === token.name && (
                     <div
                       className='absolute   bg-blue-500 rounded-full p-[2px] border-[#111827] shadow-sm'
                       style={{

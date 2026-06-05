@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import EnterPay from './(Component)/EnterPay'
 import EnterAmount from './(Component)/EnterAmount'
@@ -14,6 +14,8 @@ import useSizeScreen from '@/hooks/useSizeScreen'
 import { cn } from '@/utils/tailwind'
 import { InfoPay } from '@/services/API/poss'
 import useMedia from '@/hooks/useMedia'
+
+export type TYPE_CURRENCY = 'USD' | 'ERO'
 type Step = 'enter-pay' | 'enter-pin' | 'enter-amount' | 'qr' | 'success' | 'history'
 const HomePage = () => {
   const { isMobile } = useMedia()
@@ -21,6 +23,7 @@ const HomePage = () => {
   const { isBySizeWidth, isBySizeHeight } = useSizeScreen()
   const { reSize, heightContent, width } = useSizePoss()
   const [value, setValue] = useState('')
+  const [currency, setCurrency] = useState<TYPE_CURRENCY>('USD')
   const [infoPay, setInfoPay] = useState<InfoPay | null>(null)
   // const [infoPay, setInfoPay] = useState<InfoPay | null>({
   //   paymentId: 'pay_cda2ecc101KNR3ZFBQ5CQR24T6BKN4GP4G',
@@ -71,6 +74,8 @@ const HomePage = () => {
         >
           {step === 'enter-pay' && (
             <EnterPay
+              currency={currency}
+              setCurrency={setCurrency}
               onActivity={() => setStep('history')}
               onNewSale={() => {
                 setStep('enter-amount')
@@ -80,6 +85,7 @@ const HomePage = () => {
           )}
           {step === 'enter-amount' && (
             <EnterAmount
+              currency={currency}
               setValue={setValue}
               value={value}
               onBack={() => setStep('enter-pay')}

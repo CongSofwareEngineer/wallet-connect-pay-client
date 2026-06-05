@@ -14,16 +14,18 @@ import MyButton from '@/components/MyButton'
 import useLanguage from '@/hooks/useLanguage'
 import PossServices, { InfoPay } from '@/services/API/poss'
 import useSizePoss from '@/hooks/useSizePoss'
+import { TYPE_CURRENCY } from '@/app/page'
 
 type Props = {
   onBack: () => void
   onNext: (infoPay: InfoPay) => void
   value: string
   setValue: (value: string) => void
+  currency: 'USD' | 'ERO'
 }
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', 'back']
 
-const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
+const EnterAmount = ({ onBack, onNext, value, setValue, currency }: Props) => {
   const { translate } = useLanguage()
   const { heightContent } = useSizePoss()
   const [loading, setLoading] = useState(false)
@@ -73,7 +75,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
   const handleSubmit = async () => {
     setLoading(true)
     PossServices.isStopTracking = false
-    const res = await PossServices.createPayment(value)
+    const res = await PossServices.createPayment(value, currency)
 
     setLoading(false)
     onNext(res)
@@ -118,7 +120,7 @@ const EnterAmount = ({ onBack, onNext, value, setValue }: Props) => {
             <div className='relative flex items-center justify-center'>
               <div className='flex items-baseline'>
                 <Span className={cn('font-bold  mb-2 mr-1', isValidValue ? '' : 'text-slate-400')} style={{ fontSize: 18 }}>
-                  $
+                  {currency === 'USD' ? '$' : '€'}
                 </Span>
                 <Span className={cn('font-bold  tracking-tight', isValidValue ? '' : 'text-slate-400')} style={{ fontSize: 18 }}>
                   {value || '0.00'}

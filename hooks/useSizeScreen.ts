@@ -12,8 +12,6 @@ const useSizeScreen = () => {
     const handleResize = () => {
       const ratioScree = window.innerHeight / window.innerWidth
 
-      console.log({ ratioScree })
-
       setSizeScreen({
         width: window.innerWidth,
         height: window.innerHeight,

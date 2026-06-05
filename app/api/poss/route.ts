@@ -3,6 +3,7 @@ import { NextRequest } from 'next/server'
 import fetchConfig from '@/config/fetchConfig'
 import { POSS_CONFIG } from '@/config/poss'
 import PossUtils from '@/utils/poss'
+import { TYPE_CURRENCY } from '@/app/page'
 
 const baseURL = 'https://pos-demo.walletconnect.com'
 
@@ -21,6 +22,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const endpoint = body.endpoint
     const chainType = body.chainType
+    const currency = body.currency as TYPE_CURRENCY
     const url = req.url
 
     console.log({ url })
@@ -38,6 +40,8 @@ export async function POST(req: NextRequest) {
       },
     }
 
+    const unit = currency === 'USD' ? 'iso4217/USD' : 'iso4217/EUR'
+
     switch (endpoint) {
       case 'payment':
         request.url = '/api/payment'
@@ -46,7 +50,7 @@ export async function POST(req: NextRequest) {
           referenceId: body.referenceId,
           amount: {
             value: body.value,
-            unit: 'iso4217/USD',
+            unit,
           },
         }
         break

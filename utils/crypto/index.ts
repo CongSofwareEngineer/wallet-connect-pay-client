@@ -4,14 +4,14 @@ import AES from 'crypto-js/aes'
 import encUtf8Package from 'crypto-js/enc-utf8'
 import CryptoJS from 'crypto-js'
 
-const getIV = () => enc.parse(process.env.KEY_CRYPTO_IV_ENCODE!)
+const getIV = () => enc.parse('bacoor')
 
 const encUtf8 = (pinCode?: string) => {
   if (!pinCode) {
     pinCode = process.env.KEY_CRYPTO_IV_ENCODE
   }
 
-  return PBKDF2(pinCode!, encUtf8Package.parse(process.env.KEY_CRYPTO_IV_ENCODE!), {
+  return PBKDF2(pinCode!, encUtf8Package.parse('bacoor'), {
     keySize: 256 / 32, // AES-256
     iterations: 1000,
     hasher: CryptoJS.algo.SHA256,
