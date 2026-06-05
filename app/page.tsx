@@ -98,6 +98,7 @@ const HomePage = () => {
           {step === 'qr' && infoPay && (
             <QrPay
               amount={value}
+              currency={currency}
               infoPay={infoPay}
               onBack={() => setStep('enter-amount')}
               onClose={() => setStep('enter-pay')}
@@ -107,6 +108,7 @@ const HomePage = () => {
           {step === 'success' && (
             <PaySuccess
               amount={value}
+              currency={currency}
               onBack={() => {
                 setStep('enter-pay')
                 setValue('')

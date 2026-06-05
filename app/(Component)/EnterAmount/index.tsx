@@ -83,9 +83,10 @@ const EnterAmount = ({ onBack, onNext, value, setValue, currency }: Props) => {
 
   const renderBtn = () => {
     let text = translate('walletConnectPay.enterAmount')
+    const textCurrency = currency === 'USD' ? '$' : '€'
 
     if (isValidValue) {
-      text = `Charge $${BigNumber(value).toFormat()}`
+      text = `Charge ${textCurrency}${BigNumber(value).toFormat()}`
     } else {
       if (loading) {
         text = translate('accounts.loading')

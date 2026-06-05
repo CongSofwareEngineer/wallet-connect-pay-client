@@ -13,14 +13,16 @@ import MyButton from '@/components/MyButton'
 import MyImage from '@/components/MyImage'
 import useLanguage from '@/hooks/useLanguage'
 import useSizePoss from '@/hooks/useSizePoss'
+import { TYPE_CURRENCY } from '@/app/page'
 
 type Props = {
   amount: string
   onBack: () => void
   onNewSale: () => void
+  currency: TYPE_CURRENCY
 }
 
-const PaySuccess = ({ amount, onNewSale, onBack }: Props) => {
+const PaySuccess = ({ amount, onNewSale, onBack, currency }: Props) => {
   const { translate } = useLanguage()
   const { heightContent } = useSizePoss()
 
@@ -42,7 +44,8 @@ const PaySuccess = ({ amount, onNewSale, onBack }: Props) => {
           <div className='flex flex-col items-center gap-2'>
             <Div className='  font-medium opacity-90'>{translate('walletConnectPay.paymentSuccessful')}</Div>
             <Div className='   font-bold' style={{ fontSize: 18 }}>
-              ${amount}
+              {currency === 'USD' ? '$' : '€'}
+              {amount}
             </Div>
 
             <div

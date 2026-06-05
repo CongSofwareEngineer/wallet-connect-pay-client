@@ -16,6 +16,7 @@ import useSizePoss from '@/hooks/useSizePoss'
 import useLanguage from '@/hooks/useLanguage'
 import PossServices, { InfoPay } from '@/services/API/poss'
 import { copyToClipboard } from '@/utils/notification'
+import { TYPE_CURRENCY } from '@/app/page'
 
 type Props = {
   amount: string
@@ -23,9 +24,10 @@ type Props = {
   onBack: () => void
   onClose: () => void
   onSuccess: () => void
+  currency: TYPE_CURRENCY
 }
 
-const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
+const QrPay = ({ amount, infoPay, onBack, currency, onSuccess }: Props) => {
   const { translate } = useLanguage()
   const { heightContent, widthContent } = useSizePoss()
 
@@ -52,7 +54,7 @@ const QrPay = ({ amount, infoPay, onBack, onClose, onSuccess }: Props) => {
           <Div className='text-slate-400  font-medium'>{translate('walletConnectPay.scanToPay')}</Div>
           <div className='flex items-baseline mb-4'>
             <Span className='font-bold text-white mr-1' style={{ fontSize: 16 }}>
-              $
+              {currency === 'USD' ? '$' : '€'}
             </Span>
             <Span className='font-bold tracking-tight text-white' style={{ fontSize: 16 }}>
               {amount}
