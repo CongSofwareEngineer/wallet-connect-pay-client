@@ -24,15 +24,14 @@ export async function POST(req: NextRequest) {
     const endpoint = body.endpoint
     const chainType = body.chainType
     const currency = body.currency as TYPE_CURRENCY
-    const url = req.url
-
-    console.log({ url })
 
     delete body.chainType
     delete body.endpoint
     let result
 
     const apiKey = decryptData(process.env.API_KEY || 'nokey', 'bacoor')
+
+    console.log({ apiKey })
 
     const request: any = {
       baseURL,
