@@ -4,6 +4,7 @@ import fetchConfig from '@/config/fetchConfig'
 import { POSS_CONFIG } from '@/config/poss'
 import PossUtils from '@/utils/poss'
 import { TYPE_CURRENCY } from '@/app/page'
+import { encryptData, decryptData } from '@/utils/crypto'
 
 const baseURL = 'https://pos-demo.walletconnect.com'
 
@@ -31,11 +32,13 @@ export async function POST(req: NextRequest) {
     delete body.endpoint
     let result
 
+    const apiKey = decryptData(process.env.API_KEY || 'nokey', 'bacoor')
+
     const request: any = {
       baseURL,
       headers: {
         origin: 'https://pos-demo.walletconnect.com',
-        'x-api-key': POSS_CONFIG.API_KEY,
+        'x-api-key': apiKey,
         'x-merchant-id': PossUtils.getMerchantIdByChain(chainType),
       },
     }
@@ -80,7 +83,8 @@ export async function POST(req: NextRequest) {
       default:
         break
     }
-    console.log({ request, POSS_CONFIG })
+
+    // return Response.json({ ...request, apiKeyEncode }, { headers: corsHeaders })
 
     result = await fetchConfig(request)
 
