@@ -3,7 +3,7 @@ interface EnvironmentVariables {
   readonly NEXT_PUBLIC_API_APP: string
   readonly NEXT_PUBLIC_ENV: string
   readonly NEXT_PUBLIC_BUILD: string
-  readonly API_KEY: string
+  readonly API_KEY_ENCODE: string
   readonly MERCHANT_ID: string
 }
 

@@ -17,9 +17,9 @@ export type InfoPay = {
 
 const config: any = {}
 
-if (process.env.NEXT_PUBLIC_ENV === 'development') {
-  config.baseURL = 'https://wallet-connect-pay-client.vercel.app'
-}
+// if (process.env.NEXT_PUBLIC_ENV === 'development') {
+//   config.baseURL = 'https://wallet-connect-pay-client.vercel.app'
+// }
 
 class PossServices {
   static isStopTracking = false

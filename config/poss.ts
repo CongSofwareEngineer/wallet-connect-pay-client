@@ -1,7 +1,5 @@
-import { decryptData } from '@/utils/crypto'
-
 export const POSS_CONFIG = {
-  API_KEY: decryptData(process.env.API_KEY || 'nokey', 'bacoor'),
+  API_KEY: process.env.API_KEY_ENCODE,
   MERCHANT_ID_ETHEREUM: process.env.MERCHANT_ID_ETHEREUM,
   MERCHANT_ID_BASE: process.env.MERCHANT_ID_BASE,
   MERCHANT_ID_OPTIMISM: process.env.MERCHANT_ID_OPTIMISM,

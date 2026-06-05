@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     delete body.endpoint
     let result
 
-    const apiKey = decryptData(process.env.API_KEY || 'nokey', 'bacoor')
+    const apiKey = decryptData(process.env.API_KEY_ENCODE || 'nokey', 'bacoor')
 
     console.log({ apiKey })
 
